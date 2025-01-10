@@ -3,6 +3,7 @@
 #include <ranges>
 #include <vector>
 #include <algorithm>
+#include <memory>
 
 /**
  * @brief Binary search tree implementation, accepting elements of type T
@@ -12,18 +13,15 @@ class Tree {
 private:
 	struct TreeNode {
 		T contents;
-		TreeNode* parent;
-		TreeNode* left;  
-		TreeNode* right;
+		std::unique_ptr<TreeNode> parent;
+		std::vector<std::unique_ptr<TreeNode>> children;
 
-		TreeNode(T _contents, TreeNode* _parent = nullptr, TreeNode* _left = nullptr, TreeNode* _right = nullptr) :
-			contents{ _contents }, parent{ _parent }, left{ _left }, right{ _right } {
-		}
-
-		~TreeNode() {
-			delete left;
-			delete right;
-		}
+		TreeNode(T _contents, const TreeNode* _parent = nullptr, std::initializer_list<TreeNode*> _children = nullptr):
+			parent {std::make_unique(_parent)},
+			children { _children | std::ranges::transform([](const auto child) {
+				return std::make_unique(child);
+			}) },
+			contents { _contents } {}
 	};
 
 	TreeNode* root;
