@@ -1,3 +1,5 @@
+#pragma once
+
 struct Measurement {
 	double autoconsumption;
 	double gridExport;
