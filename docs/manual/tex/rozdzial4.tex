@@ -1,0 +1,502 @@
+	\newpage
+\section{Implementacja}		%4
+%Opisać implementacje algorytmu/programu. Pokazać ciekawe fragmenty kodu
+%Opisać powstałe wyniki (algorytmu/nrzędzia)
+
+\subsection{Ogólne informacje o implementacji klas}
+
+\subsubsection{Klasa BSTTree}
+
+Drzewo jest zaimplementowane jako jeden plik \texttt{.hpp}. Nie jest podzielone na plik implementacji oraz nagłówek, ponieważ jest ono szablonem. Deklaracja klasy oraz prywatne elementy wyglądają następująco:
+
+\begin{lstlisting}[caption=Deklaracja drzewa BST, label={lst:BSTprivate}, language=C++]
+	template <typename T>
+	class BSTTree {
+		private:
+		struct Tree {
+			T contents;
+			Tree* parent;
+			Tree* left;
+			Tree* right;
+			
+			Tree(T _contents, Tree* _parent = nullptr, Tree* _left = nullptr, Tree* _right = nullptr):
+			contents { _contents },
+			parent { _parent },
+			left { _left },
+			right { _right } {}
+			
+			~Tree() {
+				delete left;
+				delete right;
+			}
+		};
+		
+		Tree* root;
+		
+		void recursive_add(const T& element, Tree*& node, Tree* parentNode = nullptr) {
+			if(node == nullptr) {
+				node = new Tree(element);
+				
+				if(parentNode == nullptr) {
+					return;
+				}
+				
+				node->parent = parentNode;
+				
+				if(node->contents >= parentNode->contents) {
+					parentNode->right = node;
+				} else {
+					parentNode->left = node;
+				}
+				
+				return;
+			}
+			
+			if(element >= node->contents) {
+				recursive_add(element, node->right, node);
+			} else {
+				recursive_add(element, node->left, node);
+			}	
+		}
+		
+		void preorder_traverse_recursive(Tree* node, std::vector<Tree*>& traversedTrees) {
+			if(node == nullptr) {
+				return;
+			}
+			
+			traversedTrees.push_back(node);
+			
+			preorder_traverse_recursive(node->left, traversedTrees);
+			preorder_traverse_recursive(node->right, traversedTrees);
+		}
+		
+		void inorder_traverse_recursive(Tree* node, std::vector<Tree*>& traversedTrees) {
+			if(node == nullptr) {
+				return;
+			}
+			
+			inorder_traverse_recursive(node->left, traversedTrees);
+			
+			traversedTrees.push_back(node);
+			
+			inorder_traverse_recursive(node->right, traversedTrees);
+		}
+		
+		void postorder_traverse_recursive(Tree* node, std::vector<Tree*>& traversedTrees) {
+			if(node == nullptr) {
+				return;
+			}
+			
+			postorder_traverse_recursive(node->left, traversedTrees);
+			postorder_traverse_recursive(node->right, traversedTrees);
+			
+			traversedTrees.push_back(node);
+		}
+		public:
+			...
+\end{lstlisting}
+
+Jak widać w kodzie zamieszczonym na listingu nr \ref{lst:BSTprivate}., Klasa jest wrapperem dla structa \texttt{Tree}, zadeklarowanego na linijce nr. 4. Struct ten ma trzy wskaźniki - \texttt{left} dla elementu lewego, \texttt{right} dla elementu prawego, \texttt{parent} dla elementu będącego rodzicem oraz zawartość \texttt{contents}, opsującą element zawarty w danym węźle. 
+
+W linii 10 zadeklarowany jest konstruktor, który domyślnie ustawia wartości wskaźników rodzica, dziecka lewego oraz prawego na \texttt{nullptr}. Istnieje możliwość sprecyzowania wartości wskaźników.
+
+Od linii 16 do 18 znajduje się destruktor drzewa. W destruktorze węzeł lewy i prawy jest usuwany.
+
+Od linijki nr 24, do końca fragmentu, zawarty jest szereg pomocniczych metod prywatnych. Ich działanie zostanie omówione przy dyskusji korzystających z nich metod publicznych.
+
+Jedną z tych metod publicznych jest \texttt{add()}, którą widać na listingu nr \ref{lst:BSTadd}
+
+\begin{lstlisting}[caption=Metoda \texttt{add()}, label={lst:BSTadd}, language=C++]
+	void add(const T& element) {
+		recursive_add(element, root);
+	}
+
+\end{lstlisting}
+
+Metoda ta przyjmuje parametr \texttt{element}, który będzie wartością nowo dodanego węzła. W swoim ciele, wywołuje ona prywatną metodę \texttt{recursive\_add()} z parametrami \texttt{element} i korzeniem drzewa \texttt{root}. Jej definicja jest zawarta w linijce 24, listingu nr \ref{lst:BSTprivate}. 
+
+Metoda \texttt{recursive\_add()} działa na zasadzie rekurencji. Na początku funkcji sprawdzane jest czy teraźniejszy \texttt{node} to \texttt{nullptr}. Jeżeli tak, oznacza to, że doszło się do końca drzewa i można ten wskaźnik ustawić jako nowy węzeł. Na linijce nr. 28, sprawdzane jest czy rodzic wskaźnika \texttt{node} to \texttt{nullptr}. Jeżeli tak, oznaczałoby to, że pracujemy ze wskaźnikiem \texttt{root}. Wracamy wtedy wcześnie z funkcji, dlatego że \texttt{root} nie ma rodzica, więc nie chcemy manipulować wskaźnikami tego rodzica. Następnie, po zakończeniu bloku \texttt{if}, ustawiane są wskaźniki rodzica. Na linijce nr. 43, metoda wywoływana jest ponownie, w zależności od tego czy zawartość \texttt{node} jest większa od liczby która ma być dodana, czy nie.
+
+Kolejną metodą na jaką można zwrócić uwagę to \texttt{traverse\_preorder()}, zawarta na listingu nr \ref{lst:BSTtraverse_preorder}. 
+
+\begin{lstlisting}[caption=Metoda \texttt{add()}, label={lst:BSTtraverse_preorder}, language=C++]
+	std::vector<T> traverse_preorder(void) {
+		std::vector<Tree*> traversedTrees;
+	
+		preorder_traverse_recursive(root, traversedTrees);
+
+		return traversedTrees 
+		| std::ranges::views::transform(
+				[](const Tree* tree) { return tree->contents; }
+		) 
+		| std::ranges::to<std::vector>(); 
+	}
+
+\end{lstlisting}
+
+Metoda \texttt{traverse\_preorder()}, ma za zadanie zwrócić wektor wartości węzłów ułożonych w kolejności preorder drzewa. Ku temu celu, na początku metody, w linijce nr 2 listingu nr \ref{lst:BSTtraverse_preorder}, deklarowany jest wektor \texttt{traversedTrees}, który będzie wypełniony wskaźnikami \texttt{Tree*} w kolejności preorder. Do wypełnienia tego wektora, używana jest prywatna metoda \texttt{preorder\_traverse\_recursive()} z parametrami \texttt{root} i \texttt{traversedTrees}.
+
+Metoda \texttt{preorder\_traverse\_recursive()}, podobnie jak inne prywatne metody jest zawarta na listingu nr \ref{lst:BSTprivate}, konkretnie od linijki nr. 50 do linijki nr. 59. Na początku metody, sprawdzane jest czy parametr \texttt{node} jest równy \texttt{nullptr} - oznaczałoby to, że dotarło się do końca danej ścieżki w drzewie i należy się wrócić. Następnie bieżący \texttt{node} jest pushowany do wektora \texttt{traversedTrees}, po czym w linijkach nr. 57 i 58, wywoływana jest dwukrotnie metoda \texttt{preorder\_traverse\_recursive()}. Za pierwszym razem na lewy, węzeł, a za drugim na prawym. Takie wywołanie sprawi, że najpierw odwiedzone zostaną lewe gałęzie, a dopiero później prawe, zgodnie z porządkiem preorder.
+
+Wracając z metody \texttt{preorder\_traverse\_recursive()} do metody \texttt{traverse\_preorder()} i listingu nr \ref{lst:BSTtraverse_preorder}, w linijce nr. 6, widać że do \texttt{traversedTrees} aplikowana jest transformacja przy użyciu biblioteki \texttt{std::ranges}, powodująca, że zwrócony zostanie wektor zawartości poszczególnych węzłów.
+
+\subsubsection{Klasa FileTree} 
+
+Głównym zadaniem klasy FileTree jest odczyt i zapis zawartość drzewa z, jak i do pliku. Odbywa się to na dwa sposoby: 1 - do zwykłego pliku tekstowego(.txt) oraz 2 - do pliku binarnego(.bin). Klasa zawiera 4 metody publiczne:
+\begin{itemize}
+	\item save\_to\_text() - Ta metoda odpowiedzialna jest za zapisywanie zawartości drzewa binarnego do pliku tekstowego.
+	\item load\_from\_file() - Ta metoda odpowiedzialna jest za wczytywanie zawartości pliku tekstowego do drzewa binarnego.
+	\item analogicznie działają metody do drzewa binarnego.
+\end{itemize}
+
+Na listingu nr \ref{lst:FileTree-class} przedstawiona jest klasa FileTree.
+\begin{lstlisting}[caption=Klasa \texttt{FileTree}, label={lst:FileTree-class}, language=C++]
+	
+	template <typename T>
+	class FileTree {
+		public:
+		void save_to_text(const std::string& filename, const std::vector<T>& elements) {
+			std::ofstream file(filename);
+			if (!file) {
+				std::cerr << "Error: Could not open file for writing.\n";
+				return;
+			}
+			for (const auto& elem : elements) {
+				file << elem << " ";
+			}
+		}
+		void load_from_text(const std::string& filename, BSTTree<T>& tree, std::vector<T>& elements, bool append = false) {
+			std::ifstream file(filename);
+			if (!file) {
+				std::cerr << "Error: Could not open file for reading.\n";
+				return;
+			}
+			if (!append) {
+				tree.delete_tree();
+				elements.clear();
+			}
+			T value;
+			while (file >> value) {
+				elements.push_back(value);
+				tree.add(value);
+			}
+		}
+		void save_to_binary(const std::string& filename, const std::vector<T>& elements) {
+			std::ofstream file(filename, std::ios::binary);
+			if (!file) {
+				std::cerr << "Error: Could not open file for binary writing.\n";
+				return;
+			}
+			size_t size = elements.size();
+			file.write(reinterpret_cast<const char*>(&size), sizeof(size));
+			for (const auto& elem : elements) {
+				file.write(reinterpret_cast<const char*>(&elem), sizeof(T));
+			}
+		}
+		void load_from_binary(const std::string& filename, BSTTree<T>& tree, std::vector<T>& elements, bool append = false) {
+			std::ifstream file(filename, std::ios::binary);
+			if (!file) {
+				std::cerr << "Error: Could not open file for binary reading.\n";
+				return;
+			}
+			if (!append) {
+				tree.delete_tree();
+				elements.clear();
+			}
+			size_t size = 0;
+			file.read(reinterpret_cast<char*>(&size), sizeof(size));
+			for (size_t i = 0; i < size; ++i) {
+				T elem;
+				file.read(reinterpret_cast<char*>(&elem), sizeof(T));
+				elements.push_back(elem);
+				tree.add(elem);
+			}
+		}
+	};
+\end{lstlisting}
+jak widać na listingu, klasa nie posiada żadnych metod prywatnych.
+Klasa składa się z 4 metod publicznych, zadeklarowanych w wiersach: 5, 15, 31, 43. Poniżej dokładniejsze objaśnienie działania metod.
+
+\begin{lstlisting}[caption=Metoda \texttt{save\_to\_file}, label={lst:FileTree-savetext}, language=C++]
+	void save_to_text(const std::string& filename, const std::vector<T>& elements) {
+		std::ofstream file(filename);
+		if (!file) {
+			std::cerr << "Error: Could not open file for writing.\n";
+			return;
+		}
+		for (const auto& elem : elements) {
+			file << elem << " ";
+		}
+	}
+\end{lstlisting}
+
+Jak widać na listingu nr \ref{lst:FileTree-savetext} metoda ma dwa parametry: filename - które definiuje nazwę pliku do którego zostanie zapisana zawartość tablicy oraz elements - który jest wektorem elementów które zostaną zapisane do pliku. Polecenie w wierszu 2 otwiera plik, jeżeli nie istnieje jest tworzony.
+Następnie w wierszu 3 mamy instrukcję if. Jeżeli plik nie może być otwarty wysyłany jest komunikat o błędzie. Jeżeli plik się otworzy, to w wierszu 7 zadeklarowana jest pętla która iteruje przez wszystkie elementy drzewa binarnego patrząc na kolejność ich dodania oraz dodaje je do pliku poleceniem w wierszu 8.
+
+
+\begin{lstlisting}[caption=Metoda \texttt{load\_to\_file}, label={lst:FileTree-loadtext}, language=C++]
+	void load_from_text(const std::string& filename, BSTTree<T>& tree, std::vector<T>& elements, bool append = false) {
+		std::ifstream file(filename);
+		if (!file) {
+			std::cerr << "Error: Could not open file for reading.\n";
+			return;
+		}
+		if (!append) {
+			tree.delete_tree();
+			elements.clear();
+		}
+		T value;
+		while (file >> value) {
+			elements.push_back(value);
+			tree.add(value);
+		}
+	}
+\end{lstlisting}
+
+Na listingu nr \ref{lst:FileTree-loadtext} przedstawiona jest metoda wczytywania danych z pliku tekstowego do drzewa binarnego. Metoda zawiera 4 parametry: filename - nazwa pliku, tree - drzewo binarne do którego będą dodane będą wartości, elements - wketor przechowujący wartości do dodania oraz append - który polega na kontroli dodawania wartości do już istniejącego drzewa z wartościami. Append jest ustawiony na false dlatego drzewo będzie czyszczone oraz następne wartości zostaną dodane do drzewa.
+
+W wierszu 2 przedstawiona jest instrukcja wyświetlenia komunikatu błędu w przypadku gdy pliku nie da się otworzyć.
+
+W wierszach 7, 8 i 9 przedstawiona jest seria instrukcji odpowiedzialna za czyszczenie drzewa binarnego z poprzednich wartości.
+
+W wierszach 11, 12, 13 oraz 14 przedstawiona jest pętla while która dodaje wartości do tablicy w takiej samej kolejności w jakiej są zapisane w pliku tekstowym.
+
+\begin{lstlisting}[caption=Metoda \texttt{save\_to\_binary}, label={lst:FileTree-savebinary}, language=C++]
+	void save_to_binary(const std::string& filename, const std::vector<T>& elements) {
+		std::ofstream file(filename, std::ios::binary);
+		if (!file) {
+			std::cerr << "Error: Could not open file for binary writing.\n";
+			return;
+		}
+		size_t size = elements.size();
+		file.write(reinterpret_cast<const char*>(&size), sizeof(size));
+		for (const auto& elem : elements) {
+			file.write(reinterpret_cast<const char*>(&elem), sizeof(T));
+		}
+	}
+\end{lstlisting}
+Na listingu \ref{lst:FileTree-savebinary} przedstawiona jest metoda zapisu danych z drzewa do pliku binarnego. Metoda posiada 2 parametry: filename - nazwa pliku oraz elements - wektor elementów do zapisania.
+
+W wierszu 2 znajduje się instrukcja tworząca plik binarny, aby stworzyć taki plik trzeba zastosować "std::ios::binary".
+
+W wierszach 3 i 4 znajduje się instrukcja if która wyświetli komunikat o błędzie w przypadku gdy pliku nie uda się otworzyć.
+
+W wierszach od 7 do 11 znajduje się szereg instrukcji odpowiedzialnych za zapis danych z drzewa do pliku binarnego.
+
+Polecenie w wierszu 7 odpowiedzialne jest za ustalenie liczby elementów w wektorze.
+Polecenie w wierszu 8 zapisuje bity z pamięci do pliku za pomocą "file.write()". Polecenie "reinterpret\_cast<const char*> jest odpowiedzialne za konwersję adresu size na wskaźnik const char*, jest to wymagane ponieważ write zapisuje bity bezpośrednio z pamięci. sizeof() definiuje ile bitów należy zapisać.
+
+Następnie za pomocą pętli for w wierszu 9, 10 oraz 11 każdy element zapisywany jest do pliku binarnego.
+
+\begin{lstlisting}[caption=Metoda \texttt{load\_to\_binary}, label={lst:FileTree-loadbinary}, language=C++]
+	void load_from_binary(const std::string& filename, BSTTree<T>& tree, std::vector<T>& elements, bool append = false) {
+		std::ifstream file(filename, std::ios::binary);
+		if (!file) {
+			std::cerr << "Error: Could not open file for binary reading.\n";
+			return;
+		}
+		if (!append) {
+			tree.delete_tree();
+			elements.clear();
+		}
+		size_t size = 0;
+		file.read(reinterpret_cast<char*>(&size), sizeof(size));
+		for (size_t i = 0; i < size; ++i) {
+			T elem;
+			file.read(reinterpret_cast<char*>(&elem), sizeof(T));
+			elements.push_back(elem);
+			tree.add(elem);
+		}
+	}
+\end{lstlisting}
+Na listingu \ref{lst:FileTree-loadbinary} przedstawiona jest metoda wczytywania elementów z pliku binarnego do drzewa binarnego.
+Metoda zawiera 4 parametry: filename - nazwa pliku, tree - wskazujące na drzewo do którego zostaną wczytane wartości, elements - wektor przechowujący elementy do wczytania oraz append - decydujący o dodaniu wartości z drzewa binarnego do istniejącej tablicy lub nie.
+
+W wierszu 2 otwierany jest plik binarny poleceniem "std::ifstream()".
+Instrukcja if w wierszach od 3 do 6 odpowiedzialna jest za wyświetlenie komunikatu o błędzie w przypadku gdy pliku nie uda się otworzyć.
+Instrukcja if w wiersach od 7 do 10 odpowiedzialna jest za czyszczenie drzewa z poprzednich wartości przed dodaniem nowych.
+Dodawanie wartości do drzewa binarnego odbywa się w wierszach od 11 do 18.
+W wierszu 11 oraz 12 czytana jest część pliku bin przechowująca liczbę przechowywanych elementów. "reinterpret\_cast<char*>(...) odpowiedzialne jest za konwersję bitów na postać bardziej odpowiednią do odczytu. sizeof(...) odpowiedzialne jest za liczbę bitów do odczytania.
+Następnie w wierszach od 13 do 18 sczytywane są wszystkie wartości oraz dodawane do drzewa. Polecenie w wierszu 16 sprawdza jest odpowiedzialne za dodawanie elementów w takiej samej kolejności w jakiej są zapisane na pliku bin. Polecenie w wierszu 17 dodaje elementy.
+
+\subsubsection{Klasa main}
+\begin{lstlisting}[caption=Klasa \texttt{main}, label={lst:main-class}, language=C++]
+	int main(int argc, char* argv[]) {
+		BSTTree<int> tree;
+		BSTTree<int> tree2;
+		FileTree<int> fileTree;
+		std::vector<int> elements;
+		
+		int option;
+		int option2;
+		int value;
+		std::println("List of options:");
+		std::println("1 - add element | 2 - remove element | 3 - print traversal preordern");
+		std::println("4 - print traversal inorder | 5 - print traversal postorder | 6 - export to file");
+		std::println("7 - import from file | 8 - delete tree | 9 - fid path to element");
+		std::println();
+		do {
+			std::print("What do you want to do? "), std::cin >> option;
+			
+			switch (option) {
+				case 1:
+				std::print("Insert element to add: ");
+				std::cin >> value;
+				tree.add(value);
+				elements.push_back(value);
+				break;
+				
+				case 2:
+				std::print("Insert element to remove: ");
+				std::cin >> value;
+				tree.delete_element(value);
+				break;
+				
+				case 3:
+				std::print("Preorder traversal:\n");
+				for (const auto& item : tree.traverse_preorder()) {
+					std::print("{}, ", item);
+				}
+				std::print("\n");
+				break;
+				
+				case 4:
+				std::print("Inorder traversal:\n");
+				for (const auto& item : tree.traverse_inorder()) {
+					std::print("{}, ", item);
+				}
+				std::print("\n");
+				break;
+				
+				case 5:
+				std::print("Postorder traversal:\n");
+				for (const auto& item : tree.traverse_postorder()) {
+					std::print("{}, ", item);
+				}
+				std::print("\n");
+				break;
+				
+				case 6:
+				std::print("1 - To text | 2 - To binary\n");
+				std::print("Do you want to export to text or binary file? ");
+				std::cin >> option2;
+				if (option2 == 1) {
+					fileTree.save_to_text("tree.txt", elements);
+					std::print("Tree saved to text file.\n");
+				}
+				else if (option2 == 2) {
+					fileTree.save_to_binary("tree.bin", elements);
+					std::print("Tree saved to binary file.\n");
+				}
+				break;
+				
+				case 7:
+				std::print("1 - From text | 2 - From binary\n");
+				std::print("Do you want to import from text or binary file? ");
+				std::cin >> option2;
+				if (option2 == 1) {
+					fileTree.load_from_text("tree.txt", tree, elements);
+					std::print("Tree loaded from text file.\n");
+				}
+				else if (option2 == 2) {
+					fileTree.load_from_binary("tree.bin", tree, elements);
+					std::print("Tree loaded from binary file.\n");
+				}
+				break;
+				case 8:
+				tree.delete_tree();
+				std::print("Tree deleted.\n");
+				break;
+				
+				case 9: {
+					std::print("Input the value to search: "), std::cin >> value;
+					auto path = tree.find_path(value);
+					if (path.empty()) {
+						std::print("Element not found.\n");
+					}
+					else {
+						std::print("Path: ");
+						for (const auto& item : path) {
+							std::print("{} ", item);
+						}
+						std::print("\n");
+					}
+				}
+				break;
+				
+				
+				default:
+				std::print("Invalid option. Try again.\n");
+				break;
+			}
+		} while (lauf());
+		
+		return 0;
+	}
+\end{lstlisting}
+Na listingu nr \ref{lst:main-class} przedstawiona jest klasa main. Klasa main odpowiedzialna jest za sterowaniem operacjami na drzewie binarnym. Do przeprowadzania operacji stworzone zostało menu, które podgląd wyboru dostępnych opcji oraz prośbę o wybranie opcji działania.
+Następnie, w zależności od wyboru opcji instrukcja switch wywołuje odpowiednią metodę z klasy \texttt{BSTTree}.
+Po wykonaniu operacji wyświetlany jest komunikat o kontynuacji lub zakończeniu działania programu. Wykorzystywana jest do tego funkcja "bool lauf" przedstawiona na listingu nr \ref{lst:main-lauf}
+\begin{lstlisting}[caption=Funkcja \texttt{lauf()}, label={lst:main-lauf}, language=C++]
+	bool lauf()
+	{
+		std::string input;
+		std::cout << "\nDo you want to repeat? (type yes ocontinue, no to stop): ", std::cin >> input;
+		do {
+			if (input == "Yes" || input == "yes" || input== "y") {
+				return true;
+			}
+			else if (input == "no" || input == "No" || input == "n") {
+				return false;
+			}
+			else {
+				std::cout << "insert ONLY yes or no", std::cin >> input;
+			}
+		} while (true);
+\end{lstlisting}
+Funkcja jest odpowiedzialna za sprawdzanie czy podano poprawną wartość w komunikacje o kontynuacji lub zakończeniu programu.
+
+\subsection{Ciekawe fragmenty kodu}
+
+\begin{lstlisting}[caption=Metoda \texttt{delete\_element()}, label={lst:delete_element_excerpt}, language=C++]
+	int delete_element(T value) {
+	...
+		if (elementOfValue->left == nullptr && elementOfValue->right == nullptr) {
+			if (elementOfValue->parent != nullptr) {
+				if(elementOfValue->parent->left == elementOfValue) {
+					elementOfValue->parent->left = nullptr;
+				} else {
+					elementOfValue->parent->right = nullptr;
+				}
+			}
+
+			delete elementOfValue;
+		} else {
+	...
+	}
+\end{lstlisting}
+
+Na listingu nr. \ref{lst:delete_element_excerpt}, widać od linijki nr. 3 zanestowane zdania \texttt{if}. Służą one do sprawdzania, czy dziecko \texttt{elementOfValue} jest połączone z rodzicem od lewej czy prawej strony, po czym wskaźnik rodzica jest zmieniany na \texttt{nullptr}. Dlatego, że C++ nie posiada łatwej możliwości tworzenia referencji do wskaźników, np. przy użyciu operatora \texttt{?}, czy lambdy, należy użyć takich niezbyt ładnych zabiegów.
+
+\begin{lstlisting}[caption=Metoda \texttt{Filepath}, label={lst:filepath}, language=C++]
+	std::vector<T> find_path(const T& value) {
+		std::vector<T> path;
+		Tree* curr = root;
+		
+		while (root != nullptr) {
+			path.push_back(curr->contents);
+			
+			if (curr->contents == value) {
+				return path;
+			}
+			else if (value < curr->contents) {
+				curr = curr->left;
+			}
+			else {
+				curr = curr->right;
+			}
+		}
+		return {};
+	}
+\end{lstlisting}
+na listingu przedstawiona jest metoda szukająca drogi do podanej wartości. Metoda przyjmuje jeden parametr: value - poszukiwana wartość. W wektorze path w wierszu 2 przechowywane będą wartości. Wskaźnik curr na root w wierszu 3 wskazuje na root w drzewie, użyty jest aby nie modyfikować bezpośrednio root. droga jest wyszukiwana za pomocą pętli while. za pomocą instrukcji w wierszu 6 wartości są dodawane do wektora path. Instrukcja if służy do przejścia na dziecko lewe lub prawe.
