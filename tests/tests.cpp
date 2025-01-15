@@ -9,7 +9,7 @@ TEST(CsvImport, ReadTest) {
 }
 
 TEST(CsvImport, CorrectConversionTest) {
-	std::array compare = {
+	std::vector compare = {
 		MeasurementRecord {
 			.time = {
 				.year = 2020,
@@ -70,6 +70,10 @@ TEST(CsvImport, CorrectConversionTest) {
 		/* { 01.10.2020 0:30,"0","0","336.7334","336.7334","0" }, */
 		/* { 01.10.2020 16:15,"119.3333","0","1871.7124","1991.0458","119.3333" } */
 	};
+
+	MeasurementsImporter importer;
+
+	ASSERT_EQ(importer.read_measurements("tests.csv"), compare);
 }
 
 int main(int argc, char **argv) {
