@@ -1,11 +1,12 @@
 #pragma once
 
 struct MeasurementRecord {
-	struct Date {
+	struct Time {
 		int year;
 		int month;
 		int day;
-	} date;
+		int quarter;
+	} time;
 
 	double autoconsumption;
 	double gridExport;
@@ -14,9 +15,10 @@ struct MeasurementRecord {
 	double production;
 
 	bool operator==(const MeasurementRecord& other) const {
-		return date.year == other.date.year &&
-		       date.month == other.date.month &&
-		       date.day == other.date.day &&
+		return time.year == other.time.year &&
+		       time.month == other.time.month &&
+		       time.day == other.time.day &&
+			   time.quarter == other.time.quarter &&
 		       autoconsumption == other.autoconsumption &&
 		       gridExport == other.gridExport &&
 		       gridImport == other.gridImport &&
