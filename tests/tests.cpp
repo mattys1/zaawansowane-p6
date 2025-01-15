@@ -5,7 +5,7 @@
 TEST(CsvImport, ReadTest) {
 	MeasurementsImporter importer;
 
-	importer.read_measurements("tests.csv");
+	importer.read_measurements("empty.csv");
 }
 
 TEST(CsvImport, CorrectConversionTest) {
@@ -57,7 +57,7 @@ TEST(CsvImport, CorrectConversionTest) {
                 .year = 2020,
                 .month = 10,
                 .day = 1,
-                .quarter = 1
+                .quarter = 3
             },
             .autoconsumption = 119.3333,
             .gridExport = 0.0,
@@ -72,8 +72,9 @@ TEST(CsvImport, CorrectConversionTest) {
 	};
 
 	MeasurementsImporter importer;
+	const auto measurements = importer.read_measurements("tests.csv");
 
-	ASSERT_EQ(importer.read_measurements("tests.csv"), compare);
+	ASSERT_EQ(measurements, compare);
 }
 
 int main(int argc, char **argv) {
