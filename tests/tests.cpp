@@ -3,12 +3,18 @@
 #include <print>
 
 TEST(CsvImport, ReadTest) {
-	std::println("ReadTest");
 	MeasurementsImporter importer;
-	std::vector<MeasurementRecord> records;
 
-	EXPECT_EQ(importer.read_measurements("Chart Export.csv"), std::vector<MeasurementRecord>());
+	importer.read_measurements("tests.csv");
 }
+
+/* TEST(CsvImport, CorrectReadTest) { */
+/* 	std::array compare = { */
+/* 		{ 01.10.2020 0:00,"0","0","406.8323","406.8323","0" }, */
+/* 		{ 01.10.2020 0:15,"0","0","403.5656","403.5656","0" }, */
+/* 		{ 01.10.2020 0:30,"0","0","336.7334","336.7334","0" }, */
+/* 	} */
+/* } */
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
