@@ -8,6 +8,12 @@ TEST(CsvImport, ReadTest) {
 	importer.read_measurements("empty.csv");
 }
 
+TEST(CsvImport, FullReadTest) {
+	MeasurementsImporter importer;
+
+	importer.read_measurements("Chart Export.csv");
+}
+
 TEST(CsvImport, CorrectConversionTest) {
 	std::vector compare = {
 		MeasurementRecord {
