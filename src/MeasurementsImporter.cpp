@@ -62,6 +62,18 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 			x.erase(remove(x.begin(), x.end(), '\"'), x.end());
 		}
 
+		const auto minutesPerQuarter { 24 * 60 / 4 };
+
+		const auto hoursMinutes { hourTime |
+			std::views::split(':') |
+			std::ranges::to<std::vector<std::string>>()
+			/* std::ranges::to<std::vector<std::string>>() }; */
+		};
+
+		const auto timeInMinutes { std::stoi(hoursMinutes[0]) * 60 + std::stoi(hoursMinutes[1]) };
+
+		/* return timeInMinutes / minutesPerQuarter + 1; */
+
 		try {
 			std::println();
 			records.push_back(
@@ -70,19 +82,8 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 						.year = std::stoi(year),
 						.month = std::stoi(month),
 						.day =  std::stoi(day),
-						.quarter = [](const std::string_view hourTime) -> int {
-							const auto minutesPerQuarter { 24 * 60 / 4 };
-
-							const auto hoursMinutes { hourTime |
-								std::views::split(':') |
-								std::ranges::to<std::vector<std::string>>()
-								/* std::ranges::to<std::vector<std::string>>() }; */
-							};
-
-							const auto timeInMinutes { std::stoi(hoursMinutes[0]) * 60 + std::stoi(hoursMinutes[1]) };
-
-							return timeInMinutes / minutesPerQuarter + 1;
-						}(hourTime)
+						.inMinutes = timeInMinutes,
+						.quarter = 	timeInMinutes / minutesPerQuarter + 1				
 					},
 
 					.autoconsumption = std::stod(entries[1]),
