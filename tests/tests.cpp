@@ -52,6 +52,7 @@ TEST(CsvImport, CorrectConversionTest) {
             .consumption = 336.7334,
             .production = 0.0
         },
+
         MeasurementRecord {
             .time = {
                 .year = 2020,
@@ -64,11 +65,26 @@ TEST(CsvImport, CorrectConversionTest) {
             .gridImport = 1871.7124,
             .consumption = 1991.0458,
             .production = 119.3333
-        }
+        },
+
+		MeasurementRecord {
+			.time = {
+				.year = 2021,
+				.month = 10,
+				.day = 31,
+				.quarter = 3
+			},
+			.autoconsumption = 416.3987,
+			.gridExport = 3064.2681,
+			.gridImport = 0.0,
+			.consumption = 416.3987,
+			.production = 3480.6667
+		}
 		/* { 01.10.2020 0:00,"0","0","406.8323","406.8323","0" }, */
 		/* { 01.10.2020 0:15,"0","0","403.5656","403.5656","0" }, */
 		/* { 01.10.2020 0:30,"0","0","336.7334","336.7334","0" }, */
 		/* { 01.10.2020 16:15,"119.3333","0","1871.7124","1991.0458","119.3333" } */
+		/* { 31.10.2021 12:30,"416.3987","3064.2681","0","416.3987","3480.6667" }*/
 	};
 
 	MeasurementsImporter importer;
