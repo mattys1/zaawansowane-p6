@@ -35,11 +35,9 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 		return {};
 	}
 
-	std::span dataLines { lines.begin() + 1, lines.end() };
-
 	std::vector<MeasurementRecord> records;
-	records.reserve(dataLines.size());
-	for(const auto& line : dataLines) {
+	records.reserve(lines.size());
+	for(const auto& line : lines) {
 
 		auto entries { std::views::split(line, ',') | std::ranges::to<std::vector<std::string>>() };
 
