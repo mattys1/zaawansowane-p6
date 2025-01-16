@@ -2,7 +2,6 @@
 #include "MeasurementsImporter.hpp"
 #include "MeasurementsTree.hpp"
 #include <print>
-#include <unordered_set>
 
 TEST(CsvImport, ReadTest) {
 	MeasurementsImporter importer;
@@ -176,45 +175,46 @@ TEST(MeasurementsTree, ConversionTest) {
 	};
 
 	std::vector compare {
-		Measurement {
-			.autoconsumption = 0.0,
-			.gridExport = 0.0,
-			.gridImport = 406.8323,
-			.consumption = 406.8323,
-			.production = 0.0
-		},
-
+        Measurement {
+            .autoconsumption = 0.0,
+            .gridExport = 0.0,
+            .gridImport = 406.8323,
+            .consumption = 406.8323,
+            .production = 0.0,
+            .timeMinutes = 0 // 0:00
+        },
         Measurement {
             .autoconsumption = 0.0,
             .gridExport = 0.0,
             .gridImport = 403.5656,
             .consumption = 403.5656,
-            .production = 0.0
+            .production = 0.0,
+            .timeMinutes = 15 // 0:15
         },
-
         Measurement {
             .autoconsumption = 0.0,
             .gridExport = 0.0,
             .gridImport = 336.7334,
             .consumption = 336.7334,
-            .production = 0.0
+            .production = 0.0,
+            .timeMinutes = 30 // 0:30
         },
-
         Measurement {
             .autoconsumption = 119.3333,
             .gridExport = 0.0,
             .gridImport = 1871.7124,
             .consumption = 1991.0458,
-            .production = 119.3333
+            .production = 119.3333,
+            .timeMinutes = 975 // 16:15
         },
-
-		Measurement {
-			.autoconsumption = 416.3987,
-			.gridExport = 3064.2681,
-			.gridImport = 0.0,
-			.consumption = 416.3987,
-			.production = 3480.6667
-		}
+        Measurement {
+            .autoconsumption = 416.3987,
+            .gridExport = 3064.2681,
+            .gridImport = 0.0,
+            .consumption = 416.3987,
+            .production = 3480.6667,
+            .timeMinutes = 750 // 12:30
+        }
 	};
 
 	MeasurementsTree tree;
