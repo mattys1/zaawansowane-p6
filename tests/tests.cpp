@@ -16,6 +16,88 @@ TEST(CsvImport, FullReadTest) {
 
 TEST(CsvImport, CorrectConversionTest) {
 	std::vector compare = {
+        MeasurementRecord {
+            .time = {
+                .year = 2020,
+                .month = 10,
+                .day = 1,
+				.inMinutes = 0, // 0:00
+                .quarter = 1,
+            },
+            .autoconsumption = 0.0,
+            .gridExport = 0.0,
+            .gridImport = 406.8323,
+            .consumption = 406.8323,
+            .production = 0.0
+        },
+        MeasurementRecord {
+            .time = {
+                .year = 2020,
+                .month = 10,
+                .day = 1,
+				.inMinutes = 15, // 0:15
+                .quarter = 1,
+            },
+            .autoconsumption = 0.0,
+            .gridExport = 0.0,
+            .gridImport = 403.5656,
+            .consumption = 403.5656,
+            .production = 0.0
+        },
+        MeasurementRecord {
+            .time = {
+                .year = 2020,
+                .month = 10,
+                .day = 1,
+				.inMinutes = 30, // 0:30
+                .quarter = 1,
+            },
+            .autoconsumption = 0.0,
+            .gridExport = 0.0,
+            .gridImport = 336.7334,
+            .consumption = 336.7334,
+            .production = 0.0
+        },
+        MeasurementRecord {
+            .time = {
+                .year = 2020,
+                .month = 10,
+                .day = 1,
+				.inMinutes = 975, // 16:15
+                .quarter = 3,
+            },
+            .autoconsumption = 119.3333,
+            .gridExport = 0.0,
+            .gridImport = 1871.7124,
+            .consumption = 1991.0458,
+            .production = 119.3333
+        },
+        MeasurementRecord {
+            .time = {
+                .year = 2021,
+                .month = 10,
+                .day = 31,
+				.inMinutes = 750, // 12:30
+                .quarter = 3,
+            },
+            .autoconsumption = 416.3987,
+            .gridExport = 3064.2681,
+            .gridImport = 0.0,
+            .consumption = 416.3987,
+            .production = 3480.6667
+        }
+		/* { 01.10.2020 0:00,"0","0","406.8323","406.8323","0" }, */
+		/* { 01.10.2020 0:15,"0","0","403.5656","403.5656","0" }, */
+		/* { 01.10.2020 0:30,"0","0","336.7334","336.7334","0" }, */
+		/* { 01.10.2020 16:15,"119.3333","0","1871.7124","1991.0458","119.3333" } */
+		/* { 31.10.2021 12:30,"416.3987","3064.2681","0","416.3987","3480.6667" }*/
+	};
+
+	MeasurementsImporter importer;
+	const auto measurements = importer.read_measurements("tests.csv");
+
+	ASSERT_EQ(measurements, compare);
+}
 		MeasurementRecord {
 			.time = {
 				.year = 2020,
