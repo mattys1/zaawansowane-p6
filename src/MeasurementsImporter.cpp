@@ -19,6 +19,15 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 			continue;
 		};
 
+		if(const auto invalid = std::find_if(line.begin(), line.end(), [](const auto x) {
+			return !((x >= '0' && x <= '9') || x == '.' || x == ',' || x == ':' || x == '\"' || isspace(x));
+		}); invalid != line.end()) {
+			std::println("Line with invalid characters, line: {}, char {}", line, *invalid);
+			continue;
+			
+			//TODO: log this
+		}
+
 		lines.emplace_back(line);
 	}
 
@@ -31,8 +40,13 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 	std::vector<MeasurementRecord> records;
 	records.reserve(dataLines.size());
 	for(const auto& line : dataLines) {
+
 		auto entries { std::views::split(line, ',') | std::ranges::to<std::vector<std::string>>() };
-		assert(entries.size() == 6);	
+
+		if(entries.size() != 6) {
+			std::println("Invalid entry size, line: {}, entries: {}", line, entries.size());
+			//TODO: log this
+		}
 
 		const auto DateAndHourTime { entries[0] |
 			std::views::split(' ') |
