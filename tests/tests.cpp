@@ -95,7 +95,8 @@ TEST(CsvImport, CorrectConversionTest) {
 	};
 
 	MeasurementsImporter importer;
-	const auto measurements = importer.read_measurements("tests.csv");
+	importer.read_measurements("tests.csv");
+	const auto measurements = importer.get_records();
 
 	ASSERT_EQ(measurements, compare);
 }

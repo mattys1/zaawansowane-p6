@@ -74,7 +74,6 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 		/* return timeInMinutes / minutesPerQuarter + 1; */
 
 		try {
-			std::println();
 			records.push_back(
 				MeasurementRecord {
 					.time = {
