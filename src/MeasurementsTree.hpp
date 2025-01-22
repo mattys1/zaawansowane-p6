@@ -131,6 +131,21 @@ public:
 				measurement
 			);
 		}
+
+		Iterator begin() {
+			return Iterator(tree, 0, 0, 0, 0, 0);
+		}
+
+		Iterator end() {
+			return Iterator(
+				tree,
+				tree.size() - 1,
+				tree.back().size() - 1,
+				tree.back().back().size() - 1,
+				tree.back().back().back().size() - 1,
+				tree.back().back().back().back().size() - 1
+			);
+		}
 	};
 public:
 	MeasurementsTree();
