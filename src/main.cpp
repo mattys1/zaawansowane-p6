@@ -1,7 +1,16 @@
 #include <print>
-#include "MeasurementTree.hpp"
+#include "MeasurementsTree.hpp"
+#include "MeasurementsImporter.hpp"
 
 int main (int argc, char *argv[]) {
-	std::println("Hello, World!");
-	return 0;
+	MeasurementsImporter importer;
+	importer.read_measurements("tests.csv");
+
+	MeasurementsTree tree;
+
+	std::println("Hello world");
+
+	/* for(const auto x : measurements) { */
+	/* 	std::println(x); */
+	/* } */
 }

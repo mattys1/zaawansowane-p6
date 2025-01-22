@@ -4,19 +4,19 @@ MeasurementsTree::MeasurementsTree(): tree {
 		2, std::vector {
 			12, std::vector {
 				30, std::vector {
-					6, std::vector {
-					Measurement()
+					6, std::vector<Measurement> {}
 				}
 			}
-		}
-	},
-} {
+		},
+	} {
 	for(size_t i = 0; i < tree.size(); i++) {
 		auto& year = tree[i];
 		const auto yearInCalendar { 2020 + i };
+
 		for(size_t j = 0; j < year.size(); j++) {
 			auto& month = year[j];
 			const auto monthInCalendar = j + 1;
+
 			if(monthInCalendar % 2 != 0) {
 				if(monthInCalendar < 8) {
 					month.push_back(std::vector {
@@ -44,7 +44,9 @@ MeasurementsTree::MeasurementsTree(): tree {
 void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> records) {
 	for(const auto& record : records) {
 		const auto time { record.time };
+
 		auto& toFill { tree[time.year - 2020][time.month - 1][time.day - 1][time.quarter - 1] };
+
 		toFill.push_back({ 
 			.autoconsumption = record.autoconsumption ,
 			.gridExport = record.gridExport     ,
@@ -58,4 +60,3 @@ void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> 
 MeasurementsTree::TreeType MeasurementsTree::get_tree(void) const {
 	return tree;
 }
-
