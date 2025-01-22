@@ -5,6 +5,15 @@
 #include <ranges>
 
 void MeasurementsImporter::read_measurements(const std::string_view fileName) {
+	const auto check_for_double { [this](const MeasurementRecord& record) -> bool {
+		if( std::ranges::find(records, record) != records.end()) {
+			// TODO: log this
+			return true;
+		}
+
+		return false;
+	}};
+
 	std::fstream measurementsFile;
 	measurementsFile.open(fileName.data(), std::fstream::in);
  
@@ -37,7 +46,6 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 
 	records.reserve(lines.size());
 	for(const auto& line : lines) {
-
 		auto entries { std::views::split(line, ',') | std::ranges::to<std::vector<std::string>>() };
 
 		if(entries.size() != 6) {
@@ -73,9 +81,9 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 
 		/* return timeInMinutes / minutesPerQuarter + 1; */
 
-		try {
-			records.push_back(
-				MeasurementRecord {
+		const auto record { [&]() -> std::variant<MeasurementRecord, std::exception> const {
+			try {
+				return MeasurementRecord {
 					.time = {
 						.year = std::stoi(year),
 						.month = std::stoi(month),
@@ -89,12 +97,23 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 					.gridImport = std::stod(entries[3]),
 					.consumption = std::stod(entries[4]),
 					.production = std::stod(entries[5])
-				}
-			);
-		} catch(std::exception& e) {
-			std::print("Error: {}\n", e.what());
+				};
+			} catch(std::exception& e) {
+				return e;
+			}
+		}()};
 
+		if(std::holds_alternative<std::exception>(record)) {
+			//TODO: log this
+			continue;
 		}
+
+		if(check_for_double(std::get<MeasurementRecord>(record))) {
+			//TODO: log this
+			continue;
+		}
+
+		records.push_back(std::get<MeasurementRecord>(record));
 	}
 }
 
