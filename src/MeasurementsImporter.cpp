@@ -4,7 +4,7 @@
 #include <print>
 #include <ranges>
 
-std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std::string_view fileName) {
+void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 	std::fstream measurementsFile;
 	measurementsFile.open(fileName.data(), std::fstream::in);
  
@@ -32,10 +32,9 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 	}
 
 	if(lines.size() == 0) {
-		return {};
+		return;
 	}
 
-	std::vector<MeasurementRecord> records;
 	records.reserve(lines.size());
 	for(const auto& line : lines) {
 
@@ -98,6 +97,8 @@ std::vector<MeasurementRecord> MeasurementsImporter::read_measurements(const std
 
 		}
 	}
+}
 
+std::vector<MeasurementRecord> MeasurementsImporter::get_records() const {
 	return records;
 }

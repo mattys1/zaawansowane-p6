@@ -5,6 +5,9 @@
 #include <fstream>
 
 class MeasurementsImporter {
+private:
+	std::vector<MeasurementRecord> records;
 public:
-	std::vector<MeasurementRecord> read_measurements(const std::string_view fileName); 
+	void read_measurements(const std::string_view fileName); 
+	std::vector<MeasurementRecord> get_records() const;
 };
