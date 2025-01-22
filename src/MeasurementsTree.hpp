@@ -8,10 +8,10 @@
 class MeasurementsTree {
 private:
 	std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>> tree;
-	decltype(tree) endDummy;
-public:
 	using TreeType = decltype(tree);
 
+	constexpr static TreeType endDummy { TreeType {} };
+public:
 	class Iterator {
 	private:
 		TreeType& tree;
@@ -21,9 +21,11 @@ public:
 		size_t quarter;
 		size_t measurement;
 
-		void incrementSafe() {
-			assert(year < tree.size());
 
+		int incrementSafe() {
+			if(year + 1 == tree.size()) {
+				return -1;
+			}
 			auto yearVec { tree[year] };
 			auto monthVect { yearVec[month] };
 			auto dayVec { monthVect[day] };
@@ -49,8 +51,6 @@ public:
 				month = 0;
 				year++;
 			}
-
-			assert(year < tree.size());
 		}
 
 		void decrementSafe() {
@@ -81,8 +81,8 @@ public:
 			}
 		}
 	public:
-		Iterator(TreeType& tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
-			tree(tree),
+		Iterator(TreeType& _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
+			tree(_tree),
 			year(year),
 			month(month),
 			day(day),
@@ -112,7 +112,10 @@ public:
 		}	
 
 		Iterator operator++() {
-			incrementSafe();
+			const auto success = incrementSafe();
+
+			if(success < 0) {
+			}
 
 			return Iterator(
 				tree,
@@ -137,6 +140,7 @@ public:
 			);
 		}
 	};
+
 public:
 	MeasurementsTree();
 

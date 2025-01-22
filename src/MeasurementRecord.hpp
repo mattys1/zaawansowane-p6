@@ -1,5 +1,6 @@
 #pragma once
 
+#include <compare>
 struct MeasurementRecord {
 	struct Time {
 		int year;
@@ -17,5 +18,5 @@ struct MeasurementRecord {
 	double consumption;
 	double production;
 
-	int operator<=>(const MeasurementRecord&) const = default;
+	std::partial_ordering operator<=>(const MeasurementRecord&) const = default;
 };

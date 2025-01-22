@@ -65,7 +65,5 @@ MeasurementsTree::Iterator MeasurementsTree::begin() {
 }
 
 MeasurementsTree::Iterator MeasurementsTree::end() {
-	return Iterator(
-		endDummy
-	);
+	return Iterator(tree, tree.size());
 }
