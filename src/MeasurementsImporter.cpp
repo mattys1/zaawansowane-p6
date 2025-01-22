@@ -1,24 +1,41 @@
 #include "MeasurementsImporter.hpp"
 #include <algorithm>
 #include <cassert>
-#include <print>
+#include <chrono>
 #include <ranges>
 
 void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 	const auto check_for_double { [this](const MeasurementRecord& record) -> bool {
-		if( std::ranges::find(records, record) != records.end()) {
-			// TODO: log this
-			return true;
-		}
+		return std::ranges::find(records, record) != records.end();
+	}};
 
-		return false;
+	const auto log { [](std::string_view line, std::fstream& file) {
+		const auto time { std::chrono::system_clock::now() };
+
+		file << std::format("{}: Loading record: {}\n", time, line);
+	}};
+
+	const auto log_err { [](std::string_view line, const std::string_view message, std::fstream& file) {
+		const auto time { std::chrono::system_clock::now() };
+
+		file << std::format("{}: {}: {}\n", time, message, line);
 	}};
 
 	std::fstream measurementsFile;
 	measurementsFile.open(fileName.data(), std::fstream::in);
  
 	if(!measurementsFile.is_open()) {
-		throw std::runtime_error("Could not open file");
+		throw std::runtime_error("Could not open input file");
+	}
+
+	std::fstream errorLogs; errorLogs.open("log_error_data_godzina.txt", std::fstream::app);
+	if(!errorLogs.is_open()) {
+		throw std::runtime_error("Could not open error log file");
+	}
+
+	std::fstream allLogs; allLogs.open("log_data_godzina.txt", std::fstream::app);
+	if(!allLogs.is_open()) {
+		throw std::runtime_error("Could not open log file");
 	}
 
 	std::vector<std::string> lines;
@@ -28,13 +45,13 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 			continue;
 		};
 
+		log(line, allLogs);
+
 		if(const auto invalid = std::find_if(line.begin(), line.end(), [](const auto x) {
 			return !((x >= '0' && x <= '9') || x == '.' || x == ',' || x == ':' || x == '\"' || isspace(x));
 		}); invalid != line.end()) {
-			std::println("Line with invalid characters, line: {}, char {}", line, *invalid);
+			log_err(line, "Line with invalid characters", errorLogs);
 			continue;
-			
-			//TODO: log this
 		}
 
 		lines.emplace_back(line);
@@ -49,8 +66,8 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 		auto entries { std::views::split(line, ',') | std::ranges::to<std::vector<std::string>>() };
 
 		if(entries.size() != 6) {
-			std::println("Invalid entry size, line: {}, entries: {}", line, entries.size());
-			//TODO: log this
+			log_err(line, "Invalid entry size", errorLogs);
+			continue;
 		}
 
 		const auto DateAndHourTime { entries[0] |
@@ -104,12 +121,12 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 		}()};
 
 		if(std::holds_alternative<std::exception>(record)) {
-			//TODO: log this
+			log_err(line, "Error converting line to values", errorLogs);
 			continue;
 		}
 
 		if(check_for_double(std::get<MeasurementRecord>(record))) {
-			//TODO: log this
+			log_err(line, "Line already exists", errorLogs);
 			continue;
 		}
 
