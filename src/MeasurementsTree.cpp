@@ -60,3 +60,12 @@ void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> 
 MeasurementsTree::TreeType MeasurementsTree::get_tree(void) const {
 	return tree;
 }
+MeasurementsTree::Iterator MeasurementsTree::begin() {
+	return MeasurementsTree::Iterator(tree, 0, 0, 0, 0, 0);
+}
+
+MeasurementsTree::Iterator MeasurementsTree::end() {
+	return Iterator(
+		endDummy
+	);
+}

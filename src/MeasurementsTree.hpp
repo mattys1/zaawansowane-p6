@@ -8,6 +8,7 @@
 class MeasurementsTree {
 private:
 	std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>> tree;
+	decltype(tree) endDummy;
 public:
 	using TreeType = decltype(tree);
 
@@ -106,6 +107,10 @@ public:
 			}
 		}	
 
+		bool operator!=(const Iterator& other) const {
+			return *this <=> other != 0;
+		}	
+
 		Iterator operator++() {
 			incrementSafe();
 
@@ -131,24 +136,12 @@ public:
 				measurement
 			);
 		}
-
-		Iterator begin() {
-			return Iterator(tree, 0, 0, 0, 0, 0);
-		}
-
-		Iterator end() {
-			return Iterator(
-				tree,
-				tree.size() - 1,
-				tree.back().size() - 1,
-				tree.back().back().size() - 1,
-				tree.back().back().back().size() - 1,
-				tree.back().back().back().back().size() - 1
-			);
-		}
 	};
 public:
 	MeasurementsTree();
+
+	Iterator begin(); 
+	Iterator end(); 
 
 	void generate_measurement_tree(std::vector<MeasurementRecord> records);
 	TreeType get_tree(void) const;
