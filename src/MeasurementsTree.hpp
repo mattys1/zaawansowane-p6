@@ -162,6 +162,7 @@ public:
 		}	
 
 		Iterator operator++() {
+			incrementSafe();
 			goToNextValid();
 
 			if(yearIdx >= tree->size()) {

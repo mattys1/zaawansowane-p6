@@ -86,8 +86,8 @@ int main (int argc, char *argv[]) {
 
 	assert(begin != end);
 
-	for(auto iter { tree.begin() }; iter != tree.end(); ++iter) {
+	for(; begin != end; ++begin) {
 		std::println("asdf");
-		result.push_back(*iter);
+		result.push_back(*begin);
 	}
 }
