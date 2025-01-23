@@ -7,6 +7,45 @@
 
 Program podzielony jest na wiele plików, w tym rozdziale zostaną opisane funkcjonalności każdego z nich.
 
+\subsection{Measurement.hpp}
+W tym pliku znajduje się struktura definiująca pojedynczy pomiar. Kod struktury został przedstawiony na listingu nr \ref{lst:measurementhpp}.
+
+\begin{lstlisting}[caption=Zawartość pliku \texttt{Measurement.hpp}, label={lst:measurementhpp}, language=C++]
+	#pragma once
+	
+	#include <compare>
+	struct Measurement {
+		double autoconsumption;
+		double gridExport;
+		double gridImport;
+		double consumption;
+		double production;
+		int timeMinutes;
+		
+		auto operator<=>(const Measurement&) const = default;
+	};
+\end{lstlisting}
+Struktura służy do przechowywania danych z pliku.
+
+\subsection{MeasurementRecord.hpp}
+W tym pliku znajduje się struktura \texttt{MeasurementRecord} wraz ze strukturą wewnętrzną \texttt{Time}. Zadaniem tej struktury jest przechowywanie mementu w czasie wraz z wartościami pomiarowymi. Struktura jest przedstawiona na listingu nr \ref{lst:measurementrechpp}.
+
+\begin{lstlisting}[caption=Zawartość pliku \texttt{MeasurementRecord.hpp}, label={lst:measurementrechpp}, language=C++]
+	#pragma once
+	
+	#include <compare>
+	struct Measurement {
+		double autoconsumption;
+		double gridExport;
+		double gridImport;
+		double consumption;
+		double production;
+		int timeMinutes;
+		
+		auto operator<=>(const Measurement&) const = default;
+	};
+\end{lstlisting}
+
 \subsubsection{MeasurementsImporter.hpp oraz MeasurementsImporter.cpp}
 
 Klasa została podzielona na dwa pliki: .hpp oraz .cpp. Na listingu nr \ref{lst:msimporter} przedstawiona została zawawrtość pliku \texttt{MeasurementsImporter.hpp}.
