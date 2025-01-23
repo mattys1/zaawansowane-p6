@@ -5,10 +5,10 @@
 %Narysować graf, UML, diagram klas, schemat działania algorytmu
 %Jeśli zadanie zakłada przedstawienie jakiegoś narzędzia (np. git, AI) należy opisać sposób jego używania
 
-\subsection{Implementacja drzewa BTS}
+\subsection{Implementacja programu}
 
 
-Do zaimplementowania drzewa BTS zostanie użyty Język \texttt{C++} z kompilatorem \texttt{g++} oraz \texttt{MVSC}. Wersja standardu \texttt{C++}to \texttt{C++23}. Wersja ta została użyta, ze względu na zawartą w niej funkcję \texttt{std::print()}. Jako, że projekt ma być rozdzielony na dwa pliki, zostanie zastosowany \texttt{CMake} w celu automatyzacji procesu budowania. \texttt{CMake} pozwala na generowanie plików budujących dany projekt, zgodnie z określoną konfiguracją. Oszczędza to programiście, szczególnie przy większych projektach, manualne pisanie Makefileów.
+Do zaimplementowania programu zostanie użyty Język \texttt{C++} z kompilatorem \texttt{gcc} oraz \texttt{MVSC}. Wersja standardu \texttt{C++}to \texttt{C++23}. Wersja ta została użyta, ze względu na zawartą w niej funkcję \texttt{std::print()}. Jako, że projekt ma być rozdzielony na dwa pliki, zostanie zastosowany \texttt{CMake} w celu automatyzacji procesu budowania. \texttt{CMake} pozwala na generowanie plików budujących dany projekt, zgodnie z określoną konfiguracją. Oszczędza to programiście, szczególnie przy większych projektach, manualne pisanie Makefileów.
 Plik konfiguracyjny \texttt{CMakeLists.txt} może wygląDać jak na rysunku
 
 \begin{lstlisting}[caption=Plik konfiguracyjny CMake, label={lst:cmakelists}, language=C++]
@@ -42,3 +42,35 @@ Konfiguracja dla Doxygena jest wygenerowana przy użyciu programu doxywizard, po
 	\caption{\centering{Interfejs programu doxywizard}}
 	\label{fig:doxywizard}
 \end{figure}
+
+\subsection{Google Test}
+
+Google Test został dodany do projektu jako biblioteka w \texttt{CMake}, co zostało ukazane na listingu nr.~\ref{lst:gtestcmake}. Framework jest automatycznie pobierany i instalowany przy konfiguracji.
+
+\begin{lstlisting}[caption=Dodanie Google Test do projektu, label={lst:gtestcmake}, language=C++]
+	include(FetchContent)
+	FetchContent_Declare(
+	googletest
+	URL https://github.com/google/googletest/archive03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+	)
+	FetchContent_MakeAvailable(googletest)
+	
+\end{lstlisting}
+
+Pliki źródłowe testów znajdują się we własnym folderze, więc też trzeba do niego dodać \texttt{CMakeLists}, jak widać na listingu nr.~\ref{lst:testscmake}
+
+\begin{lstlisting}[caption=Dodanie Google Test do projektu, label={lst:testscmake}, language=C++]
+	file(GLOB_RECURSE SRC_FILES *.cpp *.h)
+	set(TESTS_EXECUTABLE ${PROJECT_NAME}_tests)
+	
+	enable_testing()
+	
+	add_executable(${TESTS_EXECUTABLE} ${SRC_FILES})
+	
+	target_link_libraries(
+	${TESTS_EXECUTABLE} PUBLIC
+	${PROJECT_NAME}_lib
+	GTest::gtest_main
+	)
+	
+\end{lstlisting}
