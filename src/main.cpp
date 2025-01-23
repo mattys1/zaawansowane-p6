@@ -87,7 +87,6 @@ int main (int argc, char *argv[]) {
 	assert(begin != end);
 
 	for(; begin != end; ++begin) {
-		std::println("asdf");
 		result.push_back(*begin);
 	}
 }

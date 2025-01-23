@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <print>
 #include <span>
 #include <vector>
 #include "Measurement.hpp"
@@ -70,10 +69,6 @@ public:
 			std::span monthVec { yearVec[monthIdx] };
 			std::span dayVec { monthVec[dayIdx] };
 			std::span quarterVec { dayVec[quarterIdx] };
-
-			for(const auto record : quarterVec) {
-				std::println("{}", record.consumption);
-			}
 
 			while(quarterVec.empty() && yearIdx < tree->size()) {
 				const auto end { incrementSafe() };
