@@ -5,26 +5,14 @@
 %Napisać spsoób wykorzystania algorytmu po przez wykonanie przykładu (np. mnożenie macierzy - wykonać ręcznie przykład z mnożeniem macierzy pokazujący jak mnoży się macierz ręcznie)
 %Jeśli zadanie zakłada przedstawienie jakiegoś narzędzia (np. git, AI) należy opisać narzędzie
 
-\subsection{Drzewo BST}
+\subsection{Wczytanie i manipulacja plikiem}
 
-Drzewo binarne BST\cite{bstwiki} jet strukturą przechowującą dane w sposób posortowany. Poszczególne instancje danych są reprezentowane za pomocą węzłów połączonych ze sobą gałęziami. Każdy węzeł posiada dwoje dzieci - lewe oraz prawe. Prawe dziecko jest zawsze większe lub równe od swojego rodzica. Natomiast lewe dziecko jest mniejsze od rodzica i prawego dziecka.
-
-Taka struktura drzewa zapewnia efektywne sortowanie zawartych w nich danych.
-
-Graficzna reprezentacja drzewa BST zaprezentowana na rysunku \ref{fig:treegraphic}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{images/DiagramBTS}
-	\caption{Reprezentacja drzewa BST}
-	\label{fig:treegraphic}
-\end{figure}
-
-Na ryunku \ref{fig:treegraphic} węzły są reprezentowane przez okręgi a gałęzie przez strzałki.
-
+Celem projektu jest stworzenie programu który wczyta, sprawdzi oraz przetworzy dane pomiarowe znajdujące się w pliku CSV. Bardzo ważnym jest uwzględnienienie potencjalnych błędów takich jak np. puste linie lub zduplikowane wpisy, takie błędy należy odpowiednio zapisać do logów.
+Poprawne dane natomiast powinny być zorganizowane w strukturze typu rok -> miesiąc -> dzień -> ćwiartka doby. Taką strukturę można zaimplementować przy pomocy np wektorów.
+Konieczne jest również stworzenie metody umożliwiającej zapis i odczyt pliku f formacie binarnym oraz implementacja menu która pozwoli na wybór zadań do realizacji.
 
 \subsection{Git}
-Kolejnym konceptem, którym zajmuje się projekt jest narzędzie git\cite{gitsite}. Pozwala ono zarządzać poszczególnymi wersjami projektów. Głównym korzeniem gita jest system commitów, czyli zapisania zmian w pliku w stosunku do commita starszego. To, w połączeniu z jego innymi możliwościami pozwala na tworzenie długich i skomplikowanych osi czasu danych projektów. 
+Kolejnym konceptem, którym zajmuje się projekt jest narzędzie git\cite{gitsite}. Pozwala ono zarządzać poszczególnymi wersjami projektów. Głównym korzeniem gita jest system commitów, czyli zapisania zmian w pliku w stosunku do commita starszego. To, w połączeniu z jego innymi możliwościami pozwala na tworzenie długich i skomplikowanych osi czasu danych projektów.
 
 Użycie gita można zademonstrować na prostym przykładzie. Tworzymy katalog a w nim repozytorium, uzywając komendy \texttt{git init}, jak widać na rys. \ref{fig:git_init}.
 
