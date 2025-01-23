@@ -3,6 +3,7 @@
 #include <cassert>
 #include <chrono>
 #include <ranges>
+#include <variant>
 
 void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 	const auto check_for_double { [this](const MeasurementRecord& record) -> bool {

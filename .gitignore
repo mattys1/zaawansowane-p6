@@ -4,3 +4,4 @@ out/
 # docs/html/
 # docs/latex/
 /.vs
+*.txt

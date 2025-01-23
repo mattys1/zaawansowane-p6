@@ -1,0 +1,77 @@
+2025-01-22 11:32:48.961585462: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:32:48.982289481: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:32:48.986589838: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 11:32:49.180504749: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 11:32:49.191183240: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 11:32:49.324433978: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:32:49.324487449: Line with invalid characters: asdf
+2025-01-22 11:32:49.324529989: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 11:32:49.327054039: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:32:49.327108319: Line with invalid characters: asdf
+2025-01-22 11:32:49.327157859: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 11:33:08.353935113: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:33:08.379022038: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:33:08.384373779: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 11:33:08.619946631: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 11:33:08.632995641: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 11:33:08.784282734: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:33:08.784344514: Line with invalid characters: asdf
+2025-01-22 11:33:08.784396214: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 11:33:08.786988364: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:33:08.787056214: Line with invalid characters: asdf
+2025-01-22 11:33:08.787119135: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 11:34:19.146837974: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:34:19.167626650: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:34:19.172019526: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 11:34:19.366390992: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 11:34:19.377072461: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 11:34:19.510523353: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:34:19.510586673: Line with invalid characters: asdf
+2025-01-22 11:34:19.510634663: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 11:34:19.513172352: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 11:34:19.513226943: Line with invalid characters: asdf
+2025-01-22 11:34:19.513275993: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:13:08.585440104: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:13:08.605639721: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:13:08.609953391: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 13:13:08.803412569: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 13:13:08.814192664: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 13:13:08.949127697: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:13:08.949179937: Line with invalid characters: asdf
+2025-01-22 13:13:08.949221647: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:13:08.951849563: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:13:08.951904313: Line with invalid characters: asdf
+2025-01-22 13:13:08.951954203: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:21:21.208031928: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:21:21.229505524: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:21:21.234236306: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 13:21:21.430324979: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 13:21:21.441244908: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 13:21:21.577866745: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:21:21.577919876: Line with invalid characters: asdf
+2025-01-22 13:21:21.577960916: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:21:21.580668303: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:21:21.580736413: Line with invalid characters: asdf
+2025-01-22 13:21:21.580798453: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:55:04.168168221: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:55:04.188181708: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:55:04.192482635: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 13:55:04.386238130: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 13:55:04.396890670: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 13:55:04.531156146: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:55:04.531210327: Line with invalid characters: asdf
+2025-01-22 13:55:04.531252457: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:55:04.533824407: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:55:04.533878397: Line with invalid characters: asdf
+2025-01-22 13:55:04.533926137: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:58:56.147677491: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:58:56.172031720: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:58:56.177227758: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-22 13:58:56.412023901: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-22 13:58:56.425029728: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-22 13:58:56.576161757: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:58:56.576215277: Line with invalid characters: asdf
+2025-01-22 13:58:56.576256797: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-22 13:58:56.578744036: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-22 13:58:56.578798796: Line with invalid characters: asdf
+2025-01-22 13:58:56.578848336: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"

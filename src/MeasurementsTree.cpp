@@ -4,7 +4,7 @@ MeasurementsTree::MeasurementsTree(): tree {
 		2, std::vector {
 			12, std::vector {
 				30, std::vector {
-					6, std::vector<Measurement> {}
+					4, std::vector<Measurement> {}
 				}
 			}
 		},
@@ -20,7 +20,7 @@ MeasurementsTree::MeasurementsTree(): tree {
 			if(monthInCalendar % 2 != 0) {
 				if(monthInCalendar < 8) {
 					month.push_back(std::vector {
-						6, std::vector<Measurement> {}
+						4, std::vector<Measurement> {}
 					});
 				}
 			} else {
@@ -33,7 +33,7 @@ MeasurementsTree::MeasurementsTree(): tree {
 					}
 				} else if(monthInCalendar >= 8) {
 					month.push_back(std::vector {
-						6, std::vector<Measurement> {}
+						4, std::vector<Measurement> {}
 					});
 				}
 			}
@@ -59,4 +59,11 @@ void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> 
 }
 MeasurementsTree::TreeType MeasurementsTree::get_tree(void) const {
 	return tree;
+}
+MeasurementsTree::Iterator MeasurementsTree::begin() {
+	return MeasurementsTree::Iterator(&tree, 0, 0, 0, 0, 0);
+}
+
+MeasurementsTree::Iterator MeasurementsTree::end() {
+	return Iterator(nullptr, tree.size());
 }
