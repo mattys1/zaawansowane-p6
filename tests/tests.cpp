@@ -226,7 +226,7 @@ TEST(MeasurementsTree, ConversionTest) {
 		for(const auto& monthArr : yearArr) {
 			for(const auto& dayArr : monthArr) {
 				for(const auto& quarter : dayArr) {
-					for(const auto& measurement : quarter) {
+					for(const Measurement& measurement : quarter) {
 						if(measurement != Measurement {}) {
 							result.push_back(measurement);
 						}
@@ -335,8 +335,8 @@ TEST(MeasurementsTree, IteratorTest) {
 
 	std::vector<Measurement> result;
 
-	for(const auto& measurement : tree) {
-		result.push_back(measurement);
+	for(auto iter { tree.begin() }; iter != tree.end(); ++iter) {
+		result.push_back(*iter);
 	}
 
 	std::sort(result.begin(), result.end());

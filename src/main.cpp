@@ -81,7 +81,13 @@ int main (int argc, char *argv[]) {
 
 	std::vector<Measurement> result;
 
-	for(const auto& measurement : tree) {
-		result.push_back(measurement);
+	auto begin = tree.begin();
+	auto end = tree.end();
+
+	assert(begin != end);
+
+	for(auto iter { tree.begin() }; iter != tree.end(); ++iter) {
+		std::println("asdf");
+		result.push_back(*iter);
 	}
 }

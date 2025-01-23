@@ -1,130 +1,174 @@
 #pragma once
 
 #include <cassert>
+#include <print>
+#include <span>
 #include <vector>
 #include "Measurement.hpp"
 #include "MeasurementRecord.hpp"
 
 class MeasurementsTree {
 private:
-	std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>> tree;
-	using TreeType = decltype(tree);
+	using TreeType = std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>>;
+	TreeType tree;
 
 	constexpr static TreeType endDummy { TreeType {} };
 public:
 	class Iterator {
 	private:
-		TreeType& tree;
-		size_t year;
-		size_t month;
-		size_t day;
-		size_t quarter;
-		size_t measurement;
+		TreeType* tree;
+		size_t yearIdx;
+		size_t monthIdx;
+		size_t dayIdx;
+		size_t quarterIdx;
+		size_t measurementIdx;
 
 
 		int incrementSafe() {
-			if(year + 1 == tree.size()) {
-				return -1;
-			}
-			auto yearVec { tree[year] };
-			auto monthVect { yearVec[month] };
-			auto dayVec { monthVect[day] };
-			auto quarterVec { dayVec[quarter] };
-			auto record { quarterVec[measurement] };
+			assert(monthIdx < (*tree)[yearIdx].size());
+			assert(dayIdx < (*tree)[yearIdx][monthIdx].size());
+			assert(quarterIdx < (*tree)[yearIdx][monthIdx][dayIdx].size());
+			/* assert(measurementIdx < (*tree)[yearIdx][monthIdx][dayIdx][quarterIdx].size()); */
 
-			if(measurement >= quarterVec.size()) {
-				measurement = 0;
-				quarter++;
-			}
+			auto& yearVec { (*tree)[yearIdx] };
+			auto& monthVect { yearVec[monthIdx] };
+			auto& dayVec { monthVect[dayIdx] };
+			auto& quarterVec { dayVec[quarterIdx] };
 
-			if(quarter >= dayVec.size()) {
-				quarter = 0;
-				day++;
-			}
+			/* assert(quarterVec.empty()); */
+			measurementIdx++;
+			if (measurementIdx >= quarterVec.size()) {
+				measurementIdx = 0;
+				quarterIdx++;
 
-			if(quarter >= monthVect.size()) {
-				day = 0;
-				month++;
-			}
+				if (quarterIdx >= dayVec.size()) {
+					quarterIdx = 0;
+					dayIdx++;
 
-			if(month >= yearVec.size()) {
-				month = 0;
-				year++;
-			}
+					if (dayIdx >= monthVect.size()) {
+						dayIdx = 0;
+						monthIdx++;
+
+						if (monthIdx >= yearVec.size()) {
+							monthIdx = 0;
+							yearIdx++;
+
+							if (yearIdx >= tree->size()) {
+								return -1;
+							}
+						}
+					}
+				}
+    }
+			/* Measurement& measurement { quarterVec[measurementIdx] }; */
+			return 0;
 		}
 
+		void goToNextValid() {
+			//FIXME: get the reference to the actual member vectors not the copies
+			std::span yearVec { (*tree)[yearIdx] };
+			std::span monthVec { yearVec[monthIdx] };
+			std::span dayVec { monthVec[dayIdx] };
+			std::span quarterVec { dayVec[quarterIdx] };
+
+			for(const auto record : quarterVec) {
+				std::println("{}", record.consumption);
+			}
+
+			while(quarterVec.empty() && yearIdx < tree->size()) {
+				const auto end { incrementSafe() };
+
+				if(end < 0) {
+					break;	
+				}
+
+				yearVec = (*tree)[yearIdx];            
+				monthVec = yearVec[monthIdx];       
+				dayVec = monthVec[dayIdx];
+				quarterVec = dayVec[quarterIdx];    			
+			}
+
+		}
 		void decrementSafe() {
-			auto yearVec { tree[year] };
-			auto monthVec { yearVec[month] };
-			auto dayVec { monthVec[day] };
-			auto quarterVec { dayVec[quarter] };
-			auto record { quarterVec[measurement] };
+			std::span yearVec { tree[yearIdx] };
+			std::span monthVec { yearVec[monthIdx] };
+			std::span dayVec { monthVec[dayIdx] };
+			std::span quarterVec { dayVec[quarterIdx] };
+			std::span record { quarterVec[measurementIdx] };
 
-			if(measurement == 0) {
-				measurement = quarterVec.size() - 1;
-				quarter--;
+			if(measurementIdx == 0) {
+				measurementIdx = quarterVec.size() - 1;
+				quarterIdx--;
 			}
 
-			if(quarter == 0) {
-				quarter = dayVec.size() - 1;
-				day--;
+			if(quarterIdx == 0) {
+				quarterIdx = dayVec.size() - 1;
+				dayIdx--;
 			}
 
-			if(day == 0) {
-				day = monthVec.size() - 1;
-				month--;
+			if(dayIdx == 0) {
+				dayIdx = monthVec.size() - 1;
+				monthIdx--;
 			}
 
-			if(month == 0) {
-				month = yearVec.size() - 1;
-				year--;
+			if(monthIdx == 0) {
+				monthIdx = yearVec.size() - 1;
+				yearIdx--;
 			}
 		}
 	public:
-		Iterator(TreeType& _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
+		Iterator(TreeType* _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
 			tree(_tree),
-			year(year),
-			month(month),
-			day(day),
-			quarter(quarter),
-			measurement(measurement) {}
+			yearIdx(year),
+			monthIdx(month),
+			dayIdx(day),
+			quarterIdx(quarter),
+			measurementIdx(measurement) {
+			if(tree != nullptr) {
+				goToNextValid();
+			}
+		}
 
 		Measurement& operator*() {
-			return tree[year][month][day][quarter][measurement];
+			auto measurements { (*tree)[yearIdx][monthIdx][dayIdx][quarterIdx] };
+
+			assert(!measurements.empty());
+
+			return (*tree)[yearIdx][monthIdx][dayIdx][quarterIdx][measurementIdx];
 		}
 
 		std::strong_ordering operator<=>(const Iterator& other) const {
-			if(year != other.year) {
-				return year <=> other.year;
-			} else if(month != other.month) {
-				return month <=> other.month;
-			} else if(day != other.day) {
-				return day <=> other.day;
-			} else if(quarter != other.quarter) {
-				return quarter <=> other.quarter;
-			} else {
-				return measurement <=> other.measurement;
+			if(yearIdx == tree->size() && yearIdx == other.yearIdx) { // for end iterator
+				return std::strong_ordering::equal;
 			}
+
+			if(yearIdx != other.yearIdx) {
+				return yearIdx <=> other.yearIdx;
+			} else if(monthIdx != other.monthIdx) {
+				return monthIdx <=> other.monthIdx;
+			} else if(dayIdx != other.dayIdx) {
+				return dayIdx <=> other.dayIdx;
+			} else if(quarterIdx != other.quarterIdx) {
+				return quarterIdx <=> other.quarterIdx;
+			} else {
+				return measurementIdx <=> other.measurementIdx;
+			} 
+
+			return std::strong_ordering::equal;
 		}	
 
 		bool operator!=(const Iterator& other) const {
-			return *this <=> other != 0;
+			return (*this <=> other) != std::strong_ordering::equal;
 		}	
 
 		Iterator operator++() {
-			const auto success = incrementSafe();
+			goToNextValid();
 
-			if(success < 0) {
+			if(yearIdx >= tree->size()) {
+				return Iterator(nullptr, tree->size());
 			}
 
-			return Iterator(
-				tree,
-				year,
-				month,
-				day,
-				quarter,
-				measurement
-			);
+			return(*this);
 		}
 
 		Iterator operator--() {
@@ -132,11 +176,11 @@ public:
 
 			return Iterator(
 				tree,
-				year,
-				month,
-				day,
-				quarter,
-				measurement
+				yearIdx,
+				monthIdx,
+				dayIdx,
+				quarterIdx,
+				measurementIdx
 			);
 		}
 	};
