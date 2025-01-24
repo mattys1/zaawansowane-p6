@@ -158,6 +158,10 @@ public:
 			return (*this <=> other) != std::strong_ordering::equal;
 		}	
 
+		bool operator==(const Iterator& other) const {
+			return !operator!=(other);
+		}
+
 		Iterator operator++() {
 			incrementSafe();
 			goToNextValid();
