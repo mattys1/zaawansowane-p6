@@ -432,6 +432,92 @@ Na listingu nr \ref{lst:measurementreehpp} predstawiona została zawartość pli
 \end{lstlisting}
 
 W pliku znajduje się definicja klasy \texttt{MeasurementsTree} oraz klasa wewnętrzna \texttt{Iterator}.
-Klasa \texttt{Iterator} znajdująca się na wierszach od 16 do 182 służy do przechodzenia przez wszystkie pomiary w pięciopoziomowym zagnieżdżeniu wektorów. Zmienne w wierszach od 19 do 23 określają aktualną pozycję w drzewie.	Metoda \texttt{IncrementSafe} w wierszu 26 jest metodą pomocniczą do bezpiecznego przejścia do następnego elementu.
-Metoda \texttt{GoToNextValid} w wierszach od 66 do 88 służy do przeskoku do następnego niepoustego wektora pomiarów.
-Metoda \texttt{decrementSafe} w wierszach od 87 do 113 służy do cofania się.
+Klasa \texttt{Iterator} znajdująca się na wierszach od 16 do 182 służy do przechodzenia przez wszystkie pomiary w pięciopoziomowym zagnieżdżeniu wektorów. Zmienne w wierszach od 19 do 23 określają aktualną pozycję w drzewie.	Metoda \texttt{IncrementSafe} w wierszu od 26 do 63 jest metodą pomocniczą do bezpiecznego przejścia do następnego elementu. W wierszach od 27 do 29 znajdują się insstrukcje \texttt{assert}, odpowiedzialne za sprawdzanie poprawności bieżących indeksów. Instrukcje w wierszach od 32 do 35 są odpowiedzialne za odniesienia do odpowiednich wektorów dla aktualnie rozpatrywanego przypadku. Instrukcja w wierszu 38 przesuwa na kolejny element w \texttt{quarteridx}. Zagnieżdżony if w wierszach od 43 do 59 jest odpowiedzialny za zarządzanie iteracją po strukturze \texttt{tree}.
+
+Metoda \texttt{GoToNextValid} w wierszach od 66 do 88 służy do przeskoku do następnego niepustego wektora pomiarów. W wierszach od 68 do 71 znajdują się instrukcje odpowiedzialne za tworzenie wycinków do wglądu w dane. Następnie pętla \texttt{while} w wierszach od 73 do 84 sprawdza czy wektor \texttt{quarterVec} jest pusty i przechodzi aż do znalezienia niepustego lub skończenia się drzewa.
+
+
+Metoda \texttt{decrementSafe} w wierszach od 87 do 113 służy do cofania się do poprzedniego elementu. W wierszach od 88 do 92 tworzone są wycinki do wglądu w dane. W wierszach od 94 do 97 jest instrukcja if która sprawdza czy musimy cofnąć się do poprzedniej kwarty.
+Instrukcja if w wierszach od 99 do 102 sprawdza czy \texttt{quarterIdx} wynosi 0, jeżeli tak to cofamy się do poprzedniego dnia.
+Instrukcja if w wierszach od 104 do 107 sprawdza czy \texttt{dayIdx} wynosi 0, jeżeli tak to cofamy się do poprzedniego miesiąca.
+Instrukcja if w wierszach od 110 do 112 sprawdza czy \texttt{monthIdx} wynosi 0, jeżeli tak to cofamy się do poprzedniego roku.
+W wierszach od 115 do 125 znajduje się konstruktor inicjujący \texttt{Iterator}. Instrukcje w wierszach od 127 do 133 są odpowiedzialne za zwrócenie referencji do aktualnie wskazywanego pomiaru. Instrukcje w wierszach od 127 do 153 są odpowiedzialne za porównanie dwóch iteratorów w celu sprawdzenia ich kolejności. Instrukcja bool w wierszach od 155 do 157 jest odpowiedzialna za sprawdzanie czy iterator nie wskazuje na to samo co inny iterator. Instrukcje w wierszach od 159 do 165 są odpowiedzialne za przesuwanie się do następnego pomiaru w drzewie. Instrukcje w wierszach od 173 do 181 są odpowiedzialne za przesunięcie się do poprzedniego elementu w drzewie.
+
+W wierszach od 185 do 191 mamy deklaracje metod publicznych dla klasy \texttt{MeasurementTree}. Pełny kod tych metod znajduje się w listingu nr \ref{lst:measurementreecpp}.
+
+\begin{lstlisting}[caption=Zawartość pliku \texttt{MeasurementsTree.cpp}, label={lst:measurementreecpp}, language=C++]
+	#include "MeasurementsTree.hpp"
+	
+	MeasurementsTree::MeasurementsTree(): tree {
+		2, std::vector {
+			12, std::vector {
+				30, std::vector {
+					4, std::vector<Measurement> {}
+				}
+			}
+		},
+	} {
+		for(size_t i = 0; i < tree.size(); i++) {
+			auto& year = tree[i];
+			const auto yearInCalendar { 2020 + i };
+			
+			for(size_t j = 0; j < year.size(); j++) {
+				auto& month = year[j];
+				const auto monthInCalendar = j + 1;
+				
+				if(monthInCalendar % 2 != 0) {
+					if(monthInCalendar < 8) {
+						month.push_back(std::vector {
+							4, std::vector<Measurement> {}
+						});
+					}
+				} else {
+					if(monthInCalendar == 2) {
+						if(yearInCalendar == 2020) {
+							month.pop_back();
+						} else { 
+							month.pop_back();
+							month.pop_back();
+						}
+					} else if(monthInCalendar >= 8) {
+						month.push_back(std::vector {
+							4, std::vector<Measurement> {}
+						});
+					}
+				}
+			}
+		}
+	}
+	
+	void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> records) {
+		for(const auto& record : records) {
+			const auto time { record.time };
+			
+			auto& toFill { tree[time.year - 2020][time.month - 1][time.day - 1][time.quarter - 1] };
+			
+			toFill.push_back({ 
+				.autoconsumption = record.autoconsumption ,
+				.gridExport = record.gridExport     ,
+				.gridImport = record.gridImport     ,
+				.consumption = record.consumption   ,
+				.production = record.production     ,
+				.timeMinutes = record.time.inMinutes 
+			});
+		}
+	}
+	MeasurementsTree::TreeType MeasurementsTree::get_tree(void) const {
+		return tree;
+	}
+	MeasurementsTree::Iterator MeasurementsTree::begin() {
+		return MeasurementsTree::Iterator(&tree, 0, 0, 0, 0, 0);
+	}
+	
+	MeasurementsTree::Iterator MeasurementsTree::end() {
+		return Iterator(nullptr, tree.size());
+	}
+\end{lstlisting}
+W wierszach od 3 do 42 znajduje się konstruktor. Tutaj następuje inicjalizacja drzewa \texttt{tree}. Najpierw mamy wektor roku o rozmiarze 2, czyli 2 lata. Każdy element wektora roku ma wektor miesiąc o wielkości 12 czyli 12 miesięcy w roku. Następnie każdy element wektora miesiąca ma wektor dnia o rozmiarze 30, czyli 30 dni w roku. Na koniec, każdy element wektora miesiąca ma wektor dnia o rozmiarze 4, czyli 4 kwarty dnia po 6 godzin. Pętla w wierszach od 12 do 44 jest odpowiedzialna za przechodzenie po latach i miesiącach oraz modyfikowanie dni w zależności od numeru miesiąca.
+Metoda w wierszach od 44 do 59 jest odpowiedzialna za wypełnianie struktury \texttt{tree} na podstawie wektora pomiarów. Najpierw za pomocą pętli for przechodzimy po każdym rekordzie, następnie znajdujemy odpowiednie miejsce w drzewie, wrzucamy \texttt{Measurement} i na koniec zwracamy całe drzewo.
+Metoda w wierszach od 60 do 62 jest odpowiedzialna za zwracanie całego drzewa.
+Metoda w wierszach od 63 do 65 jest odpowiedzialna za zwracanie iteratora na początek.
+Metoda w wierszach od 67 do 69 jest odpowiedzialna za zwracanie iteratora na koniec.
