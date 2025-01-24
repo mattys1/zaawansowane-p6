@@ -432,22 +432,22 @@ TEST(MeasurementsTree, AtTest) {
 	EXPECT_NE(test, testWalk);
 }
 
-TEST(TreeManager, autoconsumptionSum) {
+TEST(TreeManager, sumTest) {
 	std::vector input = {
-        MeasurementRecord {
-            .time = {
-                .year = 2020,
-                .month = 10,
-                .day = 1,
+		MeasurementRecord {
+			.time = {
+				.year = 2020,
+				.month = 10,
+				.day = 1,
 				.inMinutes = 0, // 0:00
-                .quarter = 1,
-            },
-            .autoconsumption = 0.0,
-            .gridExport = 0.0,
-            .gridImport = 406.8323,
-            .consumption = 406.8323,
-            .production = 0.0
-        },
+				.quarter = 1,
+			},
+			.autoconsumption = 0.0,
+			.gridExport = 0.0,
+			.gridImport = 406.8323,
+			.consumption = 406.8323,
+			.production = 0.0
+		},
         MeasurementRecord {
             .time = {
                 .year = 2020,
@@ -511,10 +511,10 @@ TEST(TreeManager, autoconsumptionSum) {
 
 	TreeManager manager(tree);
 
-	const double result { manager.autoconsumptionSum(
+	const std::vector<Time> TimeInput {
 		{
 			.year = 2020,
-			.month = 10,
+			.month = 9,
 			.day = 1,
 			.inMinutes = 15, // 0:15
 			.quarter = 1,
@@ -526,15 +526,42 @@ TEST(TreeManager, autoconsumptionSum) {
 			.inMinutes = 975,
 			.quarter = 3
 		}
-	) };
+	};
 
+	double autoconsumptionResult { manager.autoconsumptionSum(TimeInput[0], TimeInput[1]) };
 	double expected {};
-
 	for(const auto& record : input) {
 		expected += record.autoconsumption;
 	}
+	EXPECT_DOUBLE_EQ(autoconsumptionResult, expected);
 
-	EXPECT_DOUBLE_EQ(result, expected);
+	expected = 0;
+	for(const auto& record : input) {
+		expected += record.gridExport;
+	}
+	double exportResult = manager.exportSum(TimeInput[0], TimeInput[1]);
+	EXPECT_DOUBLE_EQ(exportResult, expected);
+
+	expected = 0;
+	for(const auto& record : input) {
+		expected += record.gridImport;
+	}
+	double importResult = manager.importSum(TimeInput[0], TimeInput[1]);
+	EXPECT_DOUBLE_EQ(importResult, expected);
+
+	expected = 0;
+	for(const auto& record : input) {
+		expected += record.consumption;
+	}
+	double consumptionResult = manager.consumptionSum(TimeInput[0], TimeInput[1]);
+	EXPECT_DOUBLE_EQ(consumptionResult, expected);
+
+	expected = 0;
+	for(const auto& record : input) {
+		expected += record.production;
+	}
+	double productionResult = manager.productionSum(TimeInput[0], TimeInput[1]);
+	EXPECT_DOUBLE_EQ(productionResult, expected);
 }
 
 

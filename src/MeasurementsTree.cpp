@@ -75,5 +75,5 @@ MeasurementsTree::Iterator MeasurementsTree::at(
 	const size_t measurement,
 	const bool walkToCorrect
 ) {
-	return MeasurementsTree::Iterator(&tree, year, month, day, quarter, measurement, false);
+	return MeasurementsTree::Iterator(&tree, year, month, day, quarter, measurement, walkToCorrect);
 }
