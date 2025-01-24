@@ -75,3 +75,203 @@
 2025-01-22 13:58:56.578744036: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
 2025-01-22 13:58:56.578798796: Line with invalid characters: asdf
 2025-01-22 13:58:56.578848336: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 12:28:25.245061329: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:28:25.266092870: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:28:25.270431333: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 12:28:25.459233681: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 12:28:25.469589951: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 12:28:25.599779410: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:28:25.599848030: Line with invalid characters: asdf
+2025-01-24 12:28:25.599889540: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 12:39:23.081060518: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:39:23.101705186: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:39:23.106078773: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 12:39:23.302082372: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 12:39:23.312793862: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 12:39:23.446403806: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:39:23.446467086: Line with invalid characters: asdf
+2025-01-24 12:39:23.446508616: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 12:40:03.877781520: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:40:03.898703289: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:40:03.903233817: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 12:40:04.117267259: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 12:40:04.128847823: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 12:40:04.276675544: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:40:04.276728215: Line with invalid characters: asdf
+2025-01-24 12:40:04.276769725: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 12:41:39.412874182: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:41:39.433867983: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:41:39.438179510: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 12:41:39.640261817: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 12:41:39.651364870: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 12:41:39.790125934: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:41:39.790178525: Line with invalid characters: asdf
+2025-01-24 12:41:39.790219625: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 12:44:22.107738372: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:44:22.128357803: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:44:22.132645039: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 12:44:22.320238844: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 12:44:22.330748066: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 12:44:22.460113952: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 12:44:22.460167243: Line with invalid characters: asdf
+2025-01-24 12:44:22.460208383: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:01:47.195085490: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:01:47.216233813: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:01:47.220532252: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:01:47.406535189: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:01:47.416736730: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:01:47.544503249: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:01:47.544556669: Line with invalid characters: asdf
+2025-01-24 13:01:47.544597720: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:09:39.644964111: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:09:39.665551280: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:09:39.669872033: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:09:39.857838373: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:09:39.868166883: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:09:39.997867456: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:09:39.997921186: Line with invalid characters: asdf
+2025-01-24 13:09:39.997963206: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:10:54.493298628: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:10:54.517949001: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:10:54.523154766: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:10:54.715474303: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:10:54.726083205: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:10:54.857724143: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:10:54.857790044: Line with invalid characters: asdf
+2025-01-24 13:10:54.857844454: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:12:48.321544007: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:12:48.345651270: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:12:48.350853346: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:12:48.577986189: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:12:48.590529777: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:12:48.747449515: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:12:48.747513895: Line with invalid characters: asdf
+2025-01-24 13:12:48.747562735: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:15:54.077223479: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:15:54.102018387: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:15:54.107250064: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:15:54.335621157: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:15:54.348280507: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:15:54.506499857: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:15:54.506565278: Line with invalid characters: asdf
+2025-01-24 13:15:54.506616258: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:16:32.126321592: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:16:32.150318929: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:16:32.155326395: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:16:32.344455907: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:16:32.354755299: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:16:32.483519549: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:16:32.483588300: Line with invalid characters: asdf
+2025-01-24 13:16:32.483633870: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:17:32.826631162: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:17:32.846670767: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:17:32.850946100: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:17:33.036215145: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:17:33.046545798: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:17:33.175591423: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:17:33.175644273: Line with invalid characters: asdf
+2025-01-24 13:17:33.175687843: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:18:02.819390865: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:18:02.840184262: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:18:02.844475836: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:18:03.035450751: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:18:03.046022266: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:18:03.178139251: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:18:03.178197892: Line with invalid characters: asdf
+2025-01-24 13:18:03.178241362: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:18:26.434087357: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:18:26.454783684: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:18:26.459131138: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:18:26.651169229: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:18:26.661725853: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:18:26.793752100: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:18:26.793805711: Line with invalid characters: asdf
+2025-01-24 13:18:26.793846971: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:23:09.731531946: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:23:09.752570706: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:23:09.756940551: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:23:09.947572513: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:23:09.958200058: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:23:10.090938809: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:23:10.090999929: Line with invalid characters: asdf
+2025-01-24 13:23:10.091042900: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:26:38.264400941: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:26:38.285159572: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:26:38.289536052: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:26:38.480377789: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:26:38.490934060: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:26:38.623236105: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:26:38.623290355: Line with invalid characters: asdf
+2025-01-24 13:26:38.623333325: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:27:55.429039525: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:27:55.450806985: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:27:55.455290577: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:27:55.648657064: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:27:55.659417429: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:27:55.793164989: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:27:55.793227120: Line with invalid characters: asdf
+2025-01-24 13:27:55.793271090: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:31:45.902231755: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:31:45.922437002: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:31:45.926747688: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:31:46.117674198: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:31:46.128288352: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:31:46.260051811: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:31:46.260105071: Line with invalid characters: asdf
+2025-01-24 13:31:46.260146502: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:33:19.298833456: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:33:19.318953689: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:33:19.323203146: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:33:19.515144938: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:33:19.525750675: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:33:19.658487791: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:33:19.658540711: Line with invalid characters: asdf
+2025-01-24 13:33:19.658581941: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:34:08.087099479: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:34:08.108237596: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:34:08.112553574: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:34:08.306825423: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:34:08.317426922: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:34:08.450486795: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:34:08.450553555: Line with invalid characters: asdf
+2025-01-24 13:34:08.450608345: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:34:37.461474059: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:34:37.481998717: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:34:37.486335015: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:34:37.676679690: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:34:37.687278259: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:34:37.819180259: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:34:37.819233549: Line with invalid characters: asdf
+2025-01-24 13:34:37.819273999: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:36:10.034531313: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:36:10.056085076: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:36:10.060502215: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:36:10.251250048: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:36:10.261825889: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:36:10.394261175: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:36:10.394315145: Line with invalid characters: asdf
+2025-01-24 13:36:10.394355995: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:36:20.910783393: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:36:20.930677573: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:36:20.934988932: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:36:21.127442452: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:36:21.138055573: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:36:21.271331083: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:36:21.271384153: Line with invalid characters: asdf
+2025-01-24 13:36:21.271434073: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:40:07.653033063: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:40:07.673444422: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:40:07.677775602: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:40:07.868414292: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:40:07.879034627: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:40:08.011948481: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:40:08.012004801: Line with invalid characters: asdf
+2025-01-24 13:40:08.012045581: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"
+2025-01-24 13:56:34.224325279: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:56:34.244885018: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:56:34.249264061: Line with invalid characters: 07.10.2021 17:30,"xxxx","xxxx","yyyy","yyyy"
+2025-01-24 13:56:34.438138134: Line already exists: 13.10.2021 19:00,"0","0","637.1784","637.1784","0"
+2025-01-24 13:56:34.448449724: Invalid entry size: 15.10.2021 11:00,"363.4795","0","363.4795","4473"
+2025-01-24 13:56:34.577109783: Line with invalid characters: Time,Autokonsumpcja (W),Eksport (W),Import (W),Pobór (W),Produkcja (W)
+2025-01-24 13:56:34.577163934: Line with invalid characters: asdf
+2025-01-24 13:56:34.577208574: Line already exists: 01.10.2020 0:15,"0","0","403.5656","403.5656","0"

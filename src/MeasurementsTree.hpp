@@ -10,6 +10,8 @@
 #include "Measurement.hpp"
 #include "MeasurementRecord.hpp"
 
+using TreeType = std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>>;
+
 /**
 * @brief Manages measurement data in a hierarchical tree structure.
 */
@@ -142,15 +144,16 @@ public:
 		* @param day Day index (default 0).
 		* @param quarter Quarter index (default 0).
 		* @param measurement Measurement index (default 0).
+		* @param walkToCorrect Flag to walk to the next valid position (default true).
 		*/
-		Iterator(TreeType* _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
+		Iterator(TreeType* _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0, bool walkToCorrect = true):
 			tree(_tree),
 			yearIdx(year),
 			monthIdx(month),
 			dayIdx(day),
 			quarterIdx(quarter),
 			measurementIdx(measurement) {
-			if(tree != nullptr) {
+			if(tree != nullptr && walkToCorrect == true) {
 				goToNextValid();
 			}
 		}
@@ -209,6 +212,10 @@ public:
 		*
 		* @return Iterator& Reference to the updated iterator.
 		*/
+		bool operator==(const Iterator& other) const {
+			return !operator!=(other);
+		}
+
 		Iterator operator++() {
 			incrementSafe();
 			goToNextValid();
@@ -258,6 +265,14 @@ public:
 	* @return Iterator An iterator pointing to the end of the tree.
 	*/
 	Iterator end(); 
+	Iterator at(
+		const size_t year = 0,
+		const size_t month = 0,
+		const size_t day = 0,
+		const size_t quarter = 0,
+		const size_t measurement = 0,
+		const bool walkToCorrect = false
+	);
 
 	/**
 	* @brief Populates the tree with measurement records.

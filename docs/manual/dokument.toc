@@ -1,0 +1,24 @@
+\babel@toc {polish}{}\relax 
+\contentsline {section}{\numberline {1}Ogólne określenie wymagań}{3}{section.1}%
+\contentsline {section}{\numberline {2}Analiza problemu}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Drzewo jako struktura danych}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Wczytanie i manipulacja plikiem}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Git}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Doxygen}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Projektowanie}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Implementacja programu}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Git}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Doxygen}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Google Test}{8}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Implementacja}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Ogólne informacje o implementacji klas}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Measurement.hpp}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}MeasurementRecord.hpp}{10}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}MeasurementsImporter.hpp oraz MeasurementsImporter.cpp}{11}{subsubsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.4}MeasurementsTree.cpp i MeasurementsTree.hpp}{16}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Google Test}{24}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Wnioski}{33}{section.5}%
+\contentsline {section}{Literatura}{34}{section.5}%
+\contentsline {section}{Spis rysunków}{35}{section*.8}%
+\contentsline {section}{Spis tabel}{36}{section*.8}%
+\contentsline {section}{Spis listingów}{37}{section*.8}%

@@ -96,3 +96,13 @@ MeasurementsTree::Iterator MeasurementsTree::begin() {
 MeasurementsTree::Iterator MeasurementsTree::end() {
 	return Iterator(nullptr, tree.size());
 }
+MeasurementsTree::Iterator MeasurementsTree::at(
+	const size_t year,
+	const size_t month ,
+	const size_t day,
+	const size_t quarter,
+	const size_t measurement,
+	const bool walkToCorrect
+) {
+	return MeasurementsTree::Iterator(&tree, year, month, day, quarter, measurement, walkToCorrect);
+}
