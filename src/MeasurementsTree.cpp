@@ -1,5 +1,12 @@
+/**
+* @file MeasurementsTree.cpp
+* @brief Implementation of the MeasurementsTree class.
+*/
 #include "MeasurementsTree.hpp"
 
+/**
+* @brief Constructs an empty MeasurementsTree with pre-initialized structure.
+*/
 MeasurementsTree::MeasurementsTree(): tree {
 		2, std::vector {
 			12, std::vector {
@@ -41,6 +48,11 @@ MeasurementsTree::MeasurementsTree(): tree {
 	}
 }
 
+/**
+* @brief Generates a tree structure from a vector of measurement records.
+*
+* @param records The input measurement records to populate the tree.
+*/
 void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> records) {
 	for(const auto& record : records) {
 		const auto time { record.time };
@@ -57,13 +69,30 @@ void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> 
 		});
 	}
 }
+
+/**
+* @brief Gets the underlying tree structure.
+*
+* @return TreeType The underlying tree structure.
+*/
 MeasurementsTree::TreeType MeasurementsTree::get_tree(void) const {
 	return tree;
 }
+
+/**
+* @brief Gets an iterator to the beginning of the tree.
+*
+* @return Iterator An iterator pointing to the beginning of the tree.
+*/
 MeasurementsTree::Iterator MeasurementsTree::begin() {
 	return MeasurementsTree::Iterator(&tree, 0, 0, 0, 0, 0);
 }
 
+/**
+* @brief Gets an iterator to the end of the tree.
+*
+* @return Iterator An iterator pointing to the end of the tree.
+*/
 MeasurementsTree::Iterator MeasurementsTree::end() {
 	return Iterator(nullptr, tree.size());
 }

@@ -1,3 +1,7 @@
+/**
+* @file MeasurementsImporter.cpp
+* @brief Implementation of the MeasurementsImporter class.
+*/
 #include "MeasurementsImporter.hpp"
 #include <algorithm>
 #include <cassert>
@@ -5,6 +9,12 @@
 #include <ranges>
 #include <variant>
 
+/**
+* @brief Reads measurement records from a file.
+*
+* @param fileName The name of the file containing measurement records.
+* @throws std::runtime_error If the input or log files cannot be opened.
+*/
 void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 	const auto check_for_double { [this](const MeasurementRecord& record) -> bool {
 		return std::ranges::find(records, record) != records.end();
@@ -135,6 +145,11 @@ void MeasurementsImporter::read_measurements(const std::string_view fileName) {
 	}
 }
 
+/**
+* @brief Retrieves the imported measurement records.
+*
+* @return std::vector<MeasurementRecord> A vector of measurement records.
+*/
 std::vector<MeasurementRecord> MeasurementsImporter::get_records() const {
 	return records;
 }

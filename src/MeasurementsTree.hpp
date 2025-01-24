@@ -1,3 +1,7 @@
+/**
+* @file MeasurementsTree.hpp
+* @brief Defines the MeasurementsTree class for managing measurement data in a tree structure.
+*/
 #pragma once
 
 #include <cassert>
@@ -6,6 +10,9 @@
 #include "Measurement.hpp"
 #include "MeasurementRecord.hpp"
 
+/**
+* @brief Manages measurement data in a hierarchical tree structure.
+*/
 class MeasurementsTree {
 private:
 	using TreeType = std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>>;
@@ -13,6 +20,9 @@ private:
 
 	constexpr static TreeType endDummy { TreeType {} };
 public:
+	/**
+		* @brief Nested iterator class for traversing the MeasurementsTree.
+	*/
 	class Iterator {
 	private:
 		TreeType* tree;
@@ -22,7 +32,11 @@ public:
 		size_t quarterIdx;
 		size_t measurementIdx;
 
-
+		/**
+		* @brief Safely increments the iterator.
+		*
+		* @return int Returns -1 if the end is reached; otherwise, 0.
+		*/
 		int incrementSafe() {
 			assert(monthIdx < (*tree)[yearIdx].size());
 			assert(dayIdx < (*tree)[yearIdx][monthIdx].size());
@@ -63,6 +77,9 @@ public:
 			return 0;
 		}
 
+		/**
+		* @brief Moves the iterator to the next valid position.
+		*/
 		void goToNextValid() {
 			//FIXME: get the reference to the actual member vectors not the copies
 			std::span yearVec { (*tree)[yearIdx] };
@@ -84,6 +101,10 @@ public:
 			}
 
 		}
+
+		/**
+		* @brief Safely decrements the iterator.
+		*/
 		void decrementSafe() {
 			std::span yearVec { tree[yearIdx] };
 			std::span monthVec { yearVec[monthIdx] };
@@ -112,6 +133,16 @@ public:
 			}
 		}
 	public:
+		/**
+		* @brief Constructs an iterator for the MeasurementsTree.
+		*
+		* @param _tree Pointer to the tree structure.
+		* @param year Year index (default 0).
+		* @param month Month index (default 0).
+		* @param day Day index (default 0).
+		* @param quarter Quarter index (default 0).
+		* @param measurement Measurement index (default 0).
+		*/
 		Iterator(TreeType* _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
 			tree(_tree),
 			yearIdx(year),
@@ -124,6 +155,11 @@ public:
 			}
 		}
 
+		/**
+		* @brief Dereferences the iterator to access the current measurement.
+		*
+		* @return Measurement& Reference to the current measurement.
+		*/
 		Measurement& operator*() {
 			auto measurements { (*tree)[yearIdx][monthIdx][dayIdx][quarterIdx] };
 
@@ -132,6 +168,12 @@ public:
 			return (*tree)[yearIdx][monthIdx][dayIdx][quarterIdx][measurementIdx];
 		}
 
+		/**
+		* @brief Compares two iterators for strong ordering.
+		*
+		* @param other Another iterator to compare.
+		* @return std::strong_ordering Comparison result.
+		*/
 		std::strong_ordering operator<=>(const Iterator& other) const {
 			if(yearIdx == tree->size() && yearIdx == other.yearIdx) { // for end iterator
 				return std::strong_ordering::equal;
@@ -152,10 +194,21 @@ public:
 			return std::strong_ordering::equal;
 		}	
 
+		/**
+		* @brief Checks if two iterators are not equal.
+		*
+		* @param other Another iterator to compare.
+		* @return bool True if iterators are not equal; otherwise, false.
+		*/
 		bool operator!=(const Iterator& other) const {
 			return (*this <=> other) != std::strong_ordering::equal;
 		}	
 
+		/**
+		* @brief Pre-increments the iterator to the next position.
+		*
+		* @return Iterator& Reference to the updated iterator.
+		*/
 		Iterator operator++() {
 			incrementSafe();
 			goToNextValid();
@@ -167,6 +220,11 @@ public:
 			return(*this);
 		}
 
+		/**
+		* @brief Pre-decrements the iterator to the previous position.
+		*
+		* @return Iterator& Reference to the updated iterator.
+		*/
 		Iterator operator--() {
 			decrementSafe();
 
@@ -182,11 +240,36 @@ public:
 	};
 
 public:
+	/**
+	* @brief Constructs a new MeasurementsTree object.
+	*/
 	MeasurementsTree();
 
+	/**
+	* @brief Gets an iterator to the beginning of the tree.
+	*
+	* @return Iterator An iterator pointing to the beginning of the tree.
+	*/
 	Iterator begin(); 
+
+	/**
+	* @brief Gets an iterator to the end of the tree.
+	*
+	* @return Iterator An iterator pointing to the end of the tree.
+	*/
 	Iterator end(); 
 
+	/**
+	* @brief Populates the tree with measurement records.
+	*
+	* @param records Vector of measurement records to populate the tree.
+	*/
 	void generate_measurement_tree(std::vector<MeasurementRecord> records);
+
+	/**
+	* @brief Retrieves the underlying tree structure.
+	*
+	* @return TreeType The underlying tree structure.
+	*/
 	TreeType get_tree(void) const;
 };
