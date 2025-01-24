@@ -6,6 +6,8 @@
 #include "Measurement.hpp"
 #include "MeasurementRecord.hpp"
 
+using TreeType = std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>>;
+
 class MeasurementsTree {
 private:
 	using TreeType = std::vector<std::vector<std::vector<std::vector<std::vector<Measurement>>>>>;
@@ -186,6 +188,13 @@ public:
 
 	Iterator begin(); 
 	Iterator end(); 
+	Iterator at(
+		const size_t year = 0,
+		const size_t month = 0,
+		const size_t day = 0,
+		const size_t quarter = 0,
+		const size_t measurement = 0
+	);
 
 	void generate_measurement_tree(std::vector<MeasurementRecord> records);
 	TreeType get_tree(void) const;

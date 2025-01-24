@@ -57,7 +57,7 @@ void MeasurementsTree::generate_measurement_tree(std::vector<MeasurementRecord> 
 		});
 	}
 }
-MeasurementsTree::TreeType MeasurementsTree::get_tree(void) const {
+TreeType MeasurementsTree::get_tree(void) const {
 	return tree;
 }
 MeasurementsTree::Iterator MeasurementsTree::begin() {
@@ -66,4 +66,13 @@ MeasurementsTree::Iterator MeasurementsTree::begin() {
 
 MeasurementsTree::Iterator MeasurementsTree::end() {
 	return Iterator(nullptr, tree.size());
+}
+MeasurementsTree::Iterator MeasurementsTree::at(
+	const size_t year,
+	const size_t month ,
+	const size_t day,
+	const size_t quarter,
+	const size_t measurement
+) {
+	return MeasurementsTree::Iterator(&tree, year, month, day, quarter, measurement);
 }
