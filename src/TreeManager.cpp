@@ -1,5 +1,17 @@
+/**
+* @file TreeManager.cpp
+* @brief Implementation of the TreeManager class for analyzing MeasurementsTree data.
+*/
+
 #include "TreeManager.hpp"
 
+/**
+* @brief Calculates the sum of autoconsumption over a time range.
+*
+* @param start The start time of the range.
+* @param end The end time of the range.
+* @return double The sum of autoconsumption.
+*/
 double TreeManager::autoconsumptionSum(Time start, Time end) {
 	const auto adjustTime {[](Time& time) {
 		time.day--;
@@ -24,6 +36,13 @@ double TreeManager::autoconsumptionSum(Time start, Time end) {
 	return autoconsumptionSum;
 }
 
+/**
+* @brief Calculates the sum of energy imported over a time range.
+*
+* @param start The start time of the range.
+* @param end The end time of the range.
+* @return double The sum of energy imported.
+*/
 double TreeManager::importSum(Time start, Time end) {
 	const auto adjustTime {[](Time& time) {
 		time.day--;
@@ -48,6 +67,13 @@ double TreeManager::importSum(Time start, Time end) {
 	return importSum;
 }
 
+/**
+* @brief Calculates the sum of energy exported over a time range.
+*
+* @param start The start time of the range.
+* @param end The end time of the range.
+* @return double The sum of energy exported.
+*/
 double TreeManager::exportSum(Time start, Time end) {
 	const auto adjustTime {[](Time& time) {
 		time.day--;
@@ -72,6 +98,13 @@ double TreeManager::exportSum(Time start, Time end) {
 	return exportSum;
 }
 
+/**
+* @brief Calculates the sum of energy consumed over a time range.
+*
+* @param start The start time of the range.
+* @param end The end time of the range.
+* @return double The sum of energy consumed.
+*/
 double TreeManager::consumptionSum(Time start, Time end) {
 	const auto adjustTime {[](Time& time) {
 		time.day--;
@@ -96,6 +129,13 @@ double TreeManager::consumptionSum(Time start, Time end) {
 	return consumptionSum;
 }
 
+/**
+* @brief Calculates the sum of energy produced over a time range.
+*
+* @param start The start time of the range.
+* @param end The end time of the range.
+* @return double The sum of energy produced.
+*/
 double TreeManager::productionSum(Time start, Time end) {
 	const auto adjustTime {[](Time& time) {
 		time.day--;
