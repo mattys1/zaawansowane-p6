@@ -114,14 +114,14 @@ public:
 			}
 		}
 	public:
-		Iterator(TreeType* _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0):
+		Iterator(TreeType* _tree, size_t year = 0, size_t month = 0, size_t day = 0, size_t quarter = 0, size_t measurement = 0, bool walkToCorrect = true):
 			tree(_tree),
 			yearIdx(year),
 			monthIdx(month),
 			dayIdx(day),
 			quarterIdx(quarter),
 			measurementIdx(measurement) {
-			if(tree != nullptr) {
+			if(tree != nullptr && walkToCorrect == true) {
 				goToNextValid();
 			}
 		}
@@ -197,7 +197,8 @@ public:
 		const size_t month = 0,
 		const size_t day = 0,
 		const size_t quarter = 0,
-		const size_t measurement = 0
+		const size_t measurement = 0,
+		const bool walkToCorrect = false
 	);
 
 	void generate_measurement_tree(std::vector<MeasurementRecord> records);
