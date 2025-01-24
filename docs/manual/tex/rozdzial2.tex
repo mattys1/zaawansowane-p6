@@ -5,6 +5,10 @@
 %Napisać spsoób wykorzystania algorytmu po przez wykonanie przykładu (np. mnożenie macierzy - wykonać ręcznie przykład z mnożeniem macierzy pokazujący jak mnoży się macierz ręcznie)
 %Jeśli zadanie zakłada przedstawienie jakiegoś narzędzia (np. git, AI) należy opisać narzędzie
 
+\subsection{Drzewo jako struktura danych}
+
+Drzewo\cite{treewiki} jest hierarchiczną strukturą danych, ułożonych nieliniowo, czyli dane ułożone są w wielu poziomach. Elementy w drzewie są nazywane węzłami. Elementy połączone są ze sobą gałęziami. Każdy węzeł może mieć kilka dzieci, czyli elementów na które wskazuje, ale tylko jednego rodzica, czyli element wskazujący na dany węzeł. Między rodzeństwem, czyli elementami na tym samym poziomie nie ma żadnych połączeń bezpośrednich. Ważny w charakterystyce drzewa jest też fakt, że nie mogą w nim występować żadne cykle. 
+
 \subsection{Wczytanie i manipulacja plikiem}
 
 Celem projektu jest stworzenie programu który wczyta, sprawdzi oraz przetworzy dane pomiarowe znajdujące się w pliku CSV. Bardzo ważnym jest uwzględnienienie potencjalnych błędów takich jak np. puste linie lub zduplikowane wpisy, takie błędy należy odpowiednio zapisać do logów.
@@ -14,7 +18,7 @@ Konieczne jest również stworzenie metody umożliwiającej zapis i odczyt pliku
 \subsection{Git}
 Kolejnym konceptem, którym zajmuje się projekt jest narzędzie git\cite{gitsite}. Pozwala ono zarządzać poszczególnymi wersjami projektów. Głównym korzeniem gita jest system commitów, czyli zapisania zmian w pliku w stosunku do commita starszego. To, w połączeniu z jego innymi możliwościami pozwala na tworzenie długich i skomplikowanych osi czasu danych projektów.
 
-Użycie gita można zademonstrować na prostym przykładzie. Tworzymy katalog a w nim repozytorium, uzywając komendy \texttt{git init}, jak widać na rys. \ref{fig:git_init}.
+Użycie gita można zademonstrować na prostym przykładzie. Tworzymy katalog a w nim repozytorium, używając komendy \texttt{git init}, jak widać na rys. \ref{fig:git_init}.
 
 \begin{figure}[H]
 	\centering
