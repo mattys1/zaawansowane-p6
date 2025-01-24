@@ -521,3 +521,369 @@ Metoda w wierszach od 44 do 59 jest odpowiedzialna za wypełnianie struktury \te
 Metoda w wierszach od 60 do 62 jest odpowiedzialna za zwracanie całego drzewa.
 Metoda w wierszach od 63 do 65 jest odpowiedzialna za zwracanie iteratora na początek.
 Metoda w wierszach od 67 do 69 jest odpowiedzialna za zwracanie iteratora na koniec.
+
+\subsection{Google Test}
+Na listingu nr \ref{lst:googletest}
+
+\begin{lstlisting}[caption=Zawartość pliku \texttt{tests.cpp}, label={lst:googletest}, language=C++]
+	#include <gtest/gtest.h>
+	#include "MeasurementsImporter.hpp"
+	#include "MeasurementsTree.hpp"
+	#include <print>
+	
+	TEST(CsvImport, ReadTest) {
+		MeasurementsImporter importer;
+		
+		importer.read_measurements("empty.csv");
+	}
+	
+	TEST(CsvImport, FullReadTest) {
+		MeasurementsImporter importer;
+		
+		importer.read_measurements("Chart Export.csv");
+	}
+	
+	TEST(CsvImport, CorrectConversionTest) {
+		std::vector compare = {
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 0, // 0:00
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 406.8323,
+				.consumption = 406.8323,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 15, // 0:15
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 403.5656,
+				.consumption = 403.5656,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 30, // 0:30
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 336.7334,
+				.consumption = 336.7334,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 975, // 16:15
+					.quarter = 3,
+				},
+				.autoconsumption = 119.3333,
+				.gridExport = 0.0,
+				.gridImport = 1871.7124,
+				.consumption = 1991.0458,
+				.production = 119.3333
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2021,
+					.month = 10,
+					.day = 31,
+					.inMinutes = 750, // 12:30
+					.quarter = 3,
+				},
+				.autoconsumption = 416.3987,
+				.gridExport = 3064.2681,
+				.gridImport = 0.0,
+				.consumption = 416.3987,
+				.production = 3480.6667
+			}
+			/* { 01.10.2020 0:00,"0","0","406.8323","406.8323","0" }, */
+			/* { 01.10.2020 0:15,"0","0","403.5656","403.5656","0" }, */
+			/* { 01.10.2020 0:30,"0","0","336.7334","336.7334","0" }, */
+			/* { 01.10.2020 16:15,"119.3333","0","1871.7124","1991.0458","119.3333" } */
+			/* { 31.10.2021 12:30,"416.3987","3064.2681","0","416.3987","3480.6667" }*/
+		};
+		
+		MeasurementsImporter importer;
+		importer.read_measurements("tests.csv");
+		const auto measurements = importer.get_records();
+		
+		ASSERT_EQ(measurements, compare);
+	}
+	
+	TEST(MeasurementsTree, ConversionTest) {
+		std::vector input = {
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 0, // 0:00
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 406.8323,
+				.consumption = 406.8323,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 15, // 0:15
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 403.5656,
+				.consumption = 403.5656,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 30, // 0:30
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 336.7334,
+				.consumption = 336.7334,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 975, // 16:15
+					.quarter = 3,
+				},
+				.autoconsumption = 119.3333,
+				.gridExport = 0.0,
+				.gridImport = 1871.7124,
+				.consumption = 1991.0458,
+				.production = 119.3333
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2021,
+					.month = 10,
+					.day = 31,
+					.inMinutes = 750, // 12:30
+					.quarter = 3,
+				},
+				.autoconsumption = 416.3987,
+				.gridExport = 3064.2681,
+				.gridImport = 0.0,
+				.consumption = 416.3987,
+				.production = 3480.6667
+			}
+		};
+		
+		std::vector compare {
+			Measurement {
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 406.8323,
+				.consumption = 406.8323,
+				.production = 0.0,
+				.timeMinutes = 0 // 0:00
+			},
+			Measurement {
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 403.5656,
+				.consumption = 403.5656,
+				.production = 0.0,
+				.timeMinutes = 15 // 0:15
+			},
+			Measurement {
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 336.7334,
+				.consumption = 336.7334,
+				.production = 0.0,
+				.timeMinutes = 30 // 0:30
+			},
+			Measurement {
+				.autoconsumption = 119.3333,
+				.gridExport = 0.0,
+				.gridImport = 1871.7124,
+				.consumption = 1991.0458,
+				.production = 119.3333,
+				.timeMinutes = 975 // 16:15
+			},
+			Measurement {
+				.autoconsumption = 416.3987,
+				.gridExport = 3064.2681,
+				.gridImport = 0.0,
+				.consumption = 416.3987,
+				.production = 3480.6667,
+				.timeMinutes = 750 // 12:30
+			}
+		};
+		
+		MeasurementsTree tree;
+		tree.generate_measurement_tree(input);
+		
+		std::vector<Measurement> result;
+		for(const auto& yearArr : tree.get_tree()) {
+			for(const auto& monthArr : yearArr) {
+				for(const auto& dayArr : monthArr) {
+					for(const auto& quarter : dayArr) {
+						for(const Measurement& measurement : quarter) {
+							if(measurement != Measurement {}) {
+								result.push_back(measurement);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		std::sort(result.begin(), result.end());
+		std::sort(compare.begin(), compare.end());
+		EXPECT_EQ(result, compare);
+	}
+	
+	TEST(MeasurementsTree, IteratorTest) {
+		std::vector input = {
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 0, // 0:00
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 406.8323,
+				.consumption = 406.8323,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 15, // 0:15
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 403.5656,
+				.consumption = 403.5656,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 30, // 0:30
+					.quarter = 1,
+				},
+				.autoconsumption = 0.0,
+				.gridExport = 0.0,
+				.gridImport = 336.7334,
+				.consumption = 336.7334,
+				.production = 0.0
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2020,
+					.month = 10,
+					.day = 1,
+					.inMinutes = 975, // 16:15
+					.quarter = 3,
+				},
+				.autoconsumption = 119.3333,
+				.gridExport = 0.0,
+				.gridImport = 1871.7124,
+				.consumption = 1991.0458,
+				.production = 119.3333
+			},
+			MeasurementRecord {
+				.time = {
+					.year = 2021,
+					.month = 10,
+					.day = 31,
+					.inMinutes = 750, // 12:30
+					.quarter = 3,
+				},
+				.autoconsumption = 416.3987,
+				.gridExport = 3064.2681,
+				.gridImport = 0.0,
+				.consumption = 416.3987,
+				.production = 3480.6667
+			}
+		};
+		
+		MeasurementsTree tree;
+		tree.generate_measurement_tree(input);
+		
+		std::vector<Measurement> compare;
+		for(const auto& yearArr : tree.get_tree()) {
+			for(const auto& monthArr : yearArr) {
+				for(const auto& dayArr : monthArr) {
+					for(const auto& quarter : dayArr) {
+						for(const auto& measurement : quarter) {
+							if(measurement != Measurement {}) {
+								compare.push_back(measurement);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		std::vector<Measurement> result;
+		
+		for(auto iter { tree.begin() }; iter != tree.end(); ++iter) {
+			result.push_back(*iter);
+		}
+		
+		std::sort(result.begin(), result.end());
+		std::sort(compare.begin(), compare.end());
+		EXPECT_EQ(result, compare);
+	}
+	
+	int main(int argc, char **argv) {
+		::testing::InitGoogleTest(&argc, argv);
+		return RUN_ALL_TESTS();
+	}
+\end{lstlisting}
+
+W wierszach od 6 do 16 są testy importera csv. Pierwszy przypadek to odczyt pustego pliku, drugi przypadek to pełny odczyt.
+W wierszach od 18 do 102 znajduje się test poprawnej konwersji danych z CSV do \texttt{MeasurementRecord}.
+W wierszach od 104 do 242 znajduje się test konwersji \texttt{MeasurementRecord} do \texttt{MeasurementsTree}.	
+W wierszach od 244 do 316 znajduje się test iteratora w \texttt{MeasurementsTree}.
+W wierszach 318 i 319 tworzymy i generujemy instancję drzewa pomiarów.
+W zagnieżdżonej pętli for w wierszach od 322 do 334 iterujemy po całym drzewie oraz zbieramy wszystkie pomiary.
+W wektorze w wierszu 336 przechowywane są pomiary.
+W wierszach od 342 do 344 wektory są sortowane oraz jest sprawdzane czy wynik zgadza się z oczekiwanym.
+W wierszach od 347 do 3550 znajduje się główny punkt wyjścia do uruchamiania testów.

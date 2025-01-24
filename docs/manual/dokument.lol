@@ -7,3 +7,4 @@
 \contentsline {lstlisting}{\numberline {7}{\ignorespaces Zawartość pliku \texttt {MeasurementsImporter.cpp}}}{11}{lstlisting.7}%
 \contentsline {lstlisting}{\numberline {8}{\ignorespaces Zawartość pliku \texttt {MeasurementsTree.hpp}}}{16}{lstlisting.8}%
 \contentsline {lstlisting}{\numberline {9}{\ignorespaces Zawartość pliku \texttt {MeasurementsTree.cpp}}}{21}{lstlisting.9}%
+\contentsline {lstlisting}{\numberline {10}{\ignorespaces Zawartość pliku \texttt {tests.cpp}}}{24}{lstlisting.10}%
